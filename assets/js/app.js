@@ -266,18 +266,22 @@ function renderChannels() {
               <div class="channel-card-avatar">
                 <img src="${ch.avatar}" alt="">
               </div>
-              <div class="channel-card-info">
-                <div class="channel-card-name">${ch.name}</div>
-                <div class="channel-card-meta">${ch.handle} · ${ch.subscribers} · ${ch.videos} videos</div>
-              </div>
-            </div>
-          `).join('')}
+        <div class="channel-card-info">
+          <div class="channel-card-name">${ch.name}</div>
+          <div class="channel-card-meta">${ch.handle} · ${ch.subscribers} · ${ch.videos} videos</div>
+          <div class="channel-card-meta" style="color:var(--text-muted);font-size:11px;margin-top:4px;">${ch.promise}</div>
         </div>
+      </div>
+    `).join('')}
       </div>
     `;
   });
 
   container.innerHTML = html;
+
+  container.querySelectorAll('.channel-card').forEach(card => {
+    card.addEventListener('click', () => openChannelProfile(card.dataset.channelId));
+  });
 }
 
 // Notes page
@@ -365,52 +369,146 @@ function renderTeam() {
 }
 
 // Strategy page
+function renderStrategyCards(dimension) {
+  const s = STRATEGY;
+  let list, field;
+
+  if (dimension === 'category') { list = s.categories; field = 'category'; }
+  else if (dimension === 'stage') { list = s.stages; field = 'stage'; }
+  else if (dimension === 'topic') { list = s.topics; field = 'topic'; }
+  else if (dimension === 'philosophy') { list = s.philosophies; field = 'philosophy'; }
+  else if (dimension === 'symbol') { list = s.symbols; field = 'successSymbol'; }
+
+  return list.map(item => {
+    const channels = MOCK_DATA.channels.filter(ch => ch[field] === item.id);
+    if (!channels.length) return '';
+    return `
+      <div class="strategy-card" style="border-top: 3px solid ${item.color};">
+        <div class="strategy-card-header">
+          <span style="font-size:24px;">${item.icon}</span>
+          <div>
+            <div class="strategy-card-name">${item.name}</div>
+            <div class="strategy-card-question">${item.desc || item.question}</div>
+          </div>
+        </div>
+        <div class="strategy-card-body">
+          ${item.philosophy ? `<p>${item.philosophy}</p>` : ''}
+          <div style="margin-top:${item.philosophy ? '12' : '0'}px;">
+            ${channels.map(ch =>
+              `<span class="strategy-chip" data-channel="${ch.id}">
+                <img src="${ch.avatar}" style="width:18px;height:18px;border-radius:50%;"> ${ch.name}
+              </span>`
+            ).join('')}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
 function renderStrategy() {
   const container = document.getElementById('strategy-content');
   const s = STRATEGY;
+  const active = state.strategyTab;
 
-  const catCards = s.categories.map(c => `
-    <div class="strategy-card" style="border-top: 3px solid ${c.color};">
-      <div class="strategy-card-header">
-        <span style="font-size:24px;">${c.icon}</span>
-        <div>
-          <div class="strategy-card-name">${c.name}</div>
-          <div class="strategy-card-question">${c.question}</div>
-        </div>
-      </div>
-      <div class="strategy-card-body">
-        <p>${c.philosophy}</p>
-        <div style="margin-top:12px;">
-          ${MOCK_DATA.channels.filter(ch => ch.category === c.id).map(ch =>
-            `<span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg-card);padding:4px 10px;border-radius:20px;font-size:12px;margin:3px;">
-              <img src="${ch.avatar}" style="width:18px;height:18px;border-radius:50%;"> ${ch.name}
-            </span>`
-          ).join('')}
-        </div>
-      </div>
-    </div>
-  `).join('');
+  const tabs = [
+    { id: 'category', label: 'By Category', icon: '🏷️' },
+    { id: 'stage', label: 'By Stage', icon: '📊' },
+    { id: 'topic', label: 'By Topic', icon: '📌' },
+    { id: 'philosophy', label: 'By Philosophy', icon: '⚙️' },
+    { id: 'symbol', label: 'By Success Symbol', icon: '💎' }
+  ];
 
-  let html = `
+  const html = `
     <div style="margin-bottom:32px;">
       <h2 style="font-size:22px;margin-bottom:8px;">🧠 Content Strategy</h2>
-      <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda and what we learn from each category</p>
+      <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda and what we learn from the channels we track</p>
     </div>
-
     <div class="strategy-positioning" style="border-left:4px solid ${s.positioning.color};">
       <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Our Position</div>
       <div style="font-size:20px;font-weight:700;margin-bottom:6px;">${s.positioning.title}</div>
       <div style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:8px;">${s.positioning.subtitle}</div>
       <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${s.positioning.description}</p>
     </div>
-
     <div style="margin-top:32px;">
-      <h3 style="font-size:16px;margin-bottom:16px;color:var(--text-secondary);">Categories We Track</h3>
-      <div class="strategy-grid">${catCards}</div>
+      <h3 style="font-size:16px;margin-bottom:16px;color:var(--text-secondary);">Frameworks</h3>
+      <div class="strategy-tabs">
+        ${tabs.map(t => `<button class="strategy-tab ${active === t.id ? 'active' : ''}" data-tab="${t.id}">${t.icon} ${t.label}</button>`).join('')}
+      </div>
+      <div class="strategy-grid" id="strategy-grid">${renderStrategyCards(active)}</div>
     </div>
   `;
 
   container.innerHTML = html;
+
+  container.querySelectorAll('.strategy-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.strategyTab = btn.dataset.tab;
+      document.getElementById('strategy-grid').innerHTML = renderStrategyCards(state.strategyTab);
+      container.querySelectorAll('.strategy-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  container.querySelectorAll('.strategy-chip').forEach(chip => {
+    chip.addEventListener('click', () => openChannelProfile(chip.dataset.channel));
+  });
+}
+
+function findListItem(list, id) {
+  return list.find(i => i.id === id);
+}
+
+function openChannelProfile(channelId) {
+  const ch = MOCK_DATA.channels.find(c => c.id === channelId);
+  if (!ch) return;
+
+  const cat = findListItem(STRATEGY.categories, ch.category);
+  const st = findListItem(STRATEGY.stages, ch.stage);
+  const tp = findListItem(STRATEGY.topics, ch.topic);
+  const ph = findListItem(STRATEGY.philosophies, ch.philosophy);
+  const sy = findListItem(STRATEGY.symbols, ch.successSymbol);
+  const pf = findListItem(STRATEGY.proofFormats, ch.proofFormat);
+
+  const fields = [
+    { label: 'Promise', icon: '🎯', value: ch.promise },
+    { label: 'Enemy', icon: '⚔️', value: ch.enemy },
+    { label: 'Hero', icon: '🦸', value: ch.hero },
+    { label: 'Philosophy', icon: cat ? cat.icon : '⚙️', value: ph ? ph.name : ch.philosophy },
+    { label: 'Symbol of Success', icon: sy ? sy.icon : '💎', value: sy ? sy.name : ch.successSymbol },
+    { label: 'Proof Format', icon: pf ? pf.icon : '📋', value: pf ? pf.name : ch.proofFormat }
+  ];
+
+  const overlay = document.createElement('div');
+  overlay.className = 'profile-overlay';
+  overlay.innerHTML = `
+    <div class="profile-modal">
+      <button class="profile-close">✕</button>
+      <div class="profile-header">
+        <img src="${ch.avatar}" class="profile-avatar">
+        <div>
+          <div class="profile-name">${ch.name}</div>
+          <div class="profile-handle">${ch.handle} · ${ch.subscribers} subscribers</div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+            ${cat ? `<span class="profile-tag" style="background:${cat.color}22;color:${cat.color};">${cat.icon} ${cat.name}</span>` : ''}
+            ${st ? `<span class="profile-tag" style="background:${st.color}22;color:${st.color};">${st.icon} ${st.name}</span>` : ''}
+            ${tp ? `<span class="profile-tag" style="background:${tp.color}22;color:${tp.color};">${tp.icon} ${tp.name}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="profile-fields">
+        ${fields.map(f => `
+          <div class="profile-field">
+            <span class="profile-field-label">${f.icon} ${f.label}</span>
+            <span class="profile-field-value">${f.value}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  overlay.querySelector('.profile-close').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
 }
 
 // Navigation

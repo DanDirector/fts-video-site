@@ -271,18 +271,41 @@ const STRATEGY = {
     }
   ],
   stages: [
-    { id: 'aspiring', name: 'Aspiring', icon: '🌱', desc: 'Getting started, learning the ropes' },
-    { id: 'early', name: 'Early Stage', icon: '🏗️', desc: 'Building the first business, finding product-market fit' },
-    { id: 'growth', name: 'Growth', icon: '📈', desc: 'Scaling, systematizing, building teams' },
-    { id: 'exit', name: 'Exit / Freedom', icon: '🌴', desc: 'Selling, automating, living off systems' },
-    { id: 'investor', name: 'Investor', icon: '💎', desc: 'Capital allocation, buying assets, wealth preservation' }
+    { id: 'aspiring', name: 'Aspiring', icon: '🌱', desc: 'Getting started, learning the ropes', color: '#74b9ff' },
+    { id: 'early', name: 'Early Stage', icon: '🏗️', desc: 'Building the first business, finding product-market fit', color: '#ffaa00' },
+    { id: 'growth', name: 'Growth', icon: '📈', desc: 'Scaling, systematizing, building teams', color: '#ff6b6b' },
+    { id: 'exit', name: 'Exit / Freedom', icon: '🌴', desc: 'Selling, automating, living off systems', color: '#6c5ce7' },
+    { id: 'investor', name: 'Investor', icon: '💎', desc: 'Capital allocation, buying assets, wealth preservation', color: '#00d68f' }
   ],
   topics: [
-    { id: 'marketing', name: 'Marketing & Sales', icon: '📣', desc: 'Customer acquisition, offers, funnels, branding' },
-    { id: 'ops', name: 'Ops & Systems', icon: '⚙️', desc: 'Automation, SOPs, outsourcing, workflows' },
-    { id: 'mindset', name: 'Mindset & Philosophy', icon: '🧠', desc: 'Discipline, habits, mental models, decision-making' },
-    { id: 'content', name: 'Content & Media', icon: '🎬', desc: 'YouTube, podcasting, audience building, storytelling' },
-    { id: 'finance', name: 'Finance & Capital', icon: '💰', desc: 'Fundraising, credit, investing, cash flow management' }
+    { id: 'marketing', name: 'Marketing & Sales', icon: '📣', desc: 'Customer acquisition, offers, funnels, branding', color: '#ffaa00' },
+    { id: 'ops', name: 'Ops & Systems', icon: '⚙️', desc: 'Automation, SOPs, outsourcing, workflows', color: '#6c5ce7' },
+    { id: 'mindset', name: 'Mindset & Philosophy', icon: '🧠', desc: 'Discipline, habits, mental models, decision-making', color: '#00d68f' },
+    { id: 'content', name: 'Content & Media', icon: '🎬', desc: 'YouTube, podcasting, audience building, storytelling', color: '#74b9ff' },
+    { id: 'finance', name: 'Finance & Capital', icon: '💰', desc: 'Fundraising, credit, investing, cash flow management', color: '#ff6b6b' }
+  ],
+  philosophies: [
+    { id: 'outwork', name: 'Outwork Everyone', icon: '🔥', desc: 'Hustle harder than anyone else', color: '#ffaa00' },
+    { id: 'build_systems', name: 'Build Systems', icon: '⚙️', desc: 'Automate and design for freedom', color: '#6c5ce7' },
+    { id: 'buy_assets', name: 'Buy Assets', icon: '🏗️', desc: 'Acquire cash-flowing businesses', color: '#00d68f' },
+    { id: 'build_audience', name: 'Build Audience', icon: '🎬', desc: 'Turn content into capital', color: '#74b9ff' },
+    { id: 'scale_capital', name: 'Scale with Capital', icon: '🚀', desc: 'Raise money and go big', color: '#ff6b6b' }
+  ],
+  symbols: [
+    { id: 'freedom', name: 'Freedom', icon: '🌴', desc: 'Time and location independence', color: '#6c5ce7' },
+    { id: 'money', name: 'Money', icon: '💰', desc: 'Wealth and financial returns', color: '#00d68f' },
+    { id: 'status', name: 'Status', icon: '👑', desc: 'Recognition and reputation', color: '#ffaa00' },
+    { id: 'peace', name: 'Peace', icon: '🧘', desc: 'Calm and balanced life', color: '#74b9ff' },
+    { id: 'influence', name: 'Influence', icon: '📡', desc: 'Reach and cultural impact', color: '#ff6b6b' },
+    { id: 'power', name: 'Power', icon: '⚡', desc: 'Control and dominance', color: '#e17055' }
+  ],
+  proofFormats: [
+    { id: 'case_study', name: 'Case Studies', icon: '📋', desc: 'Real examples with data', color: '#6c5ce7' },
+    { id: 'numbers', name: 'Hard Numbers', icon: '📊', desc: 'Metrics, revenue, growth stats', color: '#ffaa00' },
+    { id: 'interview', name: 'Interviews', icon: '🎙️', desc: 'Conversations with experts', color: '#00d68f' },
+    { id: 'rant', name: 'Rants & Talks', icon: '🎤', desc: 'Long-form opinions and Q&As', color: '#ff6b6b' },
+    { id: 'personal_story', name: 'Personal Journey', icon: '📖', desc: 'First-person experience', color: '#74b9ff' },
+    { id: 'breakdown', name: 'Breakdowns', icon: '🔍', desc: 'Deconstructing what works', color: '#e17055' }
   ]
 };
 
@@ -291,47 +314,74 @@ const MOCK_DATA = {
     {
       id: 'ch1', name: 'Tim Ferriss', handle: '@timferriss',
       avatar: 'https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle', stage: 'exit', topic: 'mindset'
+      subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle', stage: 'exit', topic: 'mindset',
+      promise: 'How to design a life of freedom', enemy: 'The 9-5 grind, busywork, trading time for money',
+      hero: 'Lifestyle entrepreneur who works 4 hours', philosophy: 'build_systems',
+      successSymbol: 'freedom', proofFormat: 'personal_story'
     },
     {
       id: 'ch2', name: 'My First Million', handle: '@MyFirstMill',
       avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle', stage: 'growth', topic: 'content'
+      subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle', stage: 'growth', topic: 'content',
+      promise: 'Business ideas you haven\'t thought of', enemy: 'Boring jobs, lack of creativity, missed opportunities',
+      hero: 'Curious entrepreneur always exploring', philosophy: 'build_audience',
+      successSymbol: 'influence', proofFormat: 'breakdown'
     },
     {
       id: 'ch3', name: 'Noah Kagan', handle: '@noahkagan',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle', stage: 'aspiring', topic: 'marketing'
+      subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle', stage: 'aspiring', topic: 'marketing',
+      promise: 'How to start and grow a business without bullshit', enemy: 'Overthinking, perfectionism, fear',
+      hero: 'Action-taker who ships fast', philosophy: 'build_systems',
+      successSymbol: 'freedom', proofFormat: 'case_study'
     },
     {
       id: 'ch4', name: 'Alex Hormozi', handle: '@AlexHormozi',
       avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing'
+      subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing',
+      promise: 'How to make your first $100M', enemy: 'Bad offers, weak pricing, poor execution',
+      hero: 'Relentless businessman who wins at any cost', philosophy: 'outwork',
+      successSymbol: 'money', proofFormat: 'numbers'
     },
     {
       id: 'ch5', name: 'Gary Vaynerchuk', handle: '@GaryVee',
       avatar: 'https://yt3.googleusercontent.com/w1ZE9_lO_kpwrA9y_jL66Cqf8tYJ1uKGdmtxAmiik4ARBBDeB5wfyYOyhpcJ_qNaPajOAHbADA=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing'
+      subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing',
+      promise: 'How to win in business through patience and hard work', enemy: 'Short-term thinking, laziness, excuses',
+      hero: 'Long-term obsessed executor', philosophy: 'outwork',
+      successSymbol: 'influence', proofFormat: 'rant'
     },
     {
       id: 'ch6', name: 'Codie Sanchez', handle: '@CodieSanchez',
       avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition', stage: 'growth', topic: 'finance'
+      subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition', stage: 'growth', topic: 'finance',
+      promise: 'How to get rich buying boring businesses', enemy: 'Startup hype, get-rich-quick, gambling on crypto',
+      hero: 'Smart investor who buys cash-flow assets', philosophy: 'buy_assets',
+      successSymbol: 'freedom', proofFormat: 'case_study'
     },
     {
       id: 'ch7', name: 'Ali Abdaal', handle: '@aliabdaal',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_m2xx6mCZwsyjARnkwBKJxEv0FqGxGS2NwWNkjWH__Smw=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator', stage: 'aspiring', topic: 'content'
+      subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator', stage: 'aspiring', topic: 'content',
+      promise: 'How to be productive and happy', enemy: 'Burnout, stress, working harder not smarter',
+      hero: 'Fulfilled creator who works smart', philosophy: 'build_audience',
+      successSymbol: 'peace', proofFormat: 'personal_story'
     },
     {
       id: 'ch8', name: 'Colin and Samir', handle: '@colinandsamir',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_k-3YijnZNqr_9SNBOzN2sFB3xJ6SrHy9q3LJ0b1HApVHI=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator', stage: 'growth', topic: 'content'
+      subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator', stage: 'growth', topic: 'content',
+      promise: 'How to build a creator business', enemy: 'Traditional media, gatekeepers, old models',
+      hero: 'Professional creator who treats it as a business', philosophy: 'build_audience',
+      successSymbol: 'influence', proofFormat: 'interview'
     },
     {
       id: 'ch9', name: 'Y Combinator', handle: '@ycombinator',
       avatar: 'https://yt3.googleusercontent.com/dGyATx87Fp_s1nZvnupUFSnMqbAPZ6nqRby9Esk1m6YE41iBq-9Z8iGoIgHTCT9SiDBUpP2V=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup', stage: 'growth', topic: 'finance'
+      subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup', stage: 'growth', topic: 'finance',
+      promise: 'How to build a startup that matters', enemy: 'Bad ideas, slow execution, not raising enough',
+      hero: 'Ambitious founder changing the world', philosophy: 'scale_capital',
+      successSymbol: 'power', proofFormat: 'interview'
     }
   ],
 
