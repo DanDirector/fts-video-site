@@ -595,11 +595,34 @@ function renderStrategy() {
       <h2 style="font-size:22px;margin-bottom:8px;">🧠 Content Strategy</h2>
       <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda</p>
     </div>
-    <div class="strategy-positioning" style="border-left:4px solid ${s.positioning.color};">
-      <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Our Position</div>
-      <div style="font-size:20px;font-weight:700;margin-bottom:6px;">${s.positioning.title}</div>
-      <div style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:8px;">${s.positioning.subtitle}</div>
-      <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${s.positioning.description}</p>
+    <div class="strat-block strat-block--lg">
+      <div class="strat-block-label">Our Position</div>
+      <div class="strat-block-title">${s.positioning.title}</div>
+      <div class="strat-block-sub">${s.positioning.subtitle}</div>
+      <p class="strat-block-body">${s.positioning.description}</p>
+    </div>
+    <div class="strat-block strat-block--md">
+      <div class="strat-block-label">🎯 Positioning</div>
+      ${POSITIONING_STATEMENT.map(s => `
+        <div style="display:flex;align-items:flex-start;gap:10px;${POSITIONING_STATEMENT.indexOf(s) < POSITIONING_STATEMENT.length - 1 ? 'margin-bottom:8px;' : ''}">
+          <span style="color:var(--accent);flex-shrink:0;margin-top:3px;">✦</span>
+          <span class="strat-block-body" style="margin:0;">${s}</span>
+        </div>
+      `).join('')}
+    </div>
+    <div class="strat-block strat-block--md">
+      <div class="strat-block-label">💎 Core Phrase</div>
+      <p class="strat-block-body" style="font-size:15px;font-weight:500;margin:0;">${CORE_PHRASE}</p>
+    </div>
+    <div style="margin-top:32px;">
+      <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">💡 Mind Grenades</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        ${MIND_GRENADES.map(g => `
+          <div class="strat-block strat-block--sm">
+            <span class="strat-block-body" style="margin:0;">${g.text}</span>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 
@@ -1013,17 +1036,50 @@ function renderMarketMap() {
   container.querySelectorAll('.map-dot, .map-legend-item').forEach(el => {
     el.addEventListener('click', () => openChannelProfile(el.dataset.channel));
   });
+}
 
-  const toggle = document.getElementById('scoring-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const panel = document.getElementById('scoring-panel');
-      const arrow = document.getElementById('scoring-arrow');
-      const open = panel.style.display !== 'none';
-      panel.style.display = open ? 'none' : 'block';
-      arrow.textContent = open ? '▼' : '▲';
+// Inspiration
+function renderInspiration() {
+  const container = document.getElementById('inspiration-content');
+  const active = state.inspoTab || 'taki';
+
+  const tabs = INSPIRATION_CHANNELS.map(ch =>
+    `<button class="strategy-tab ${active === ch.id ? 'active' : ''}" data-intab="${ch.id}">${ch.name}</button>`
+  ).join('');
+
+  const channel = INSPIRATION_CHANNELS.find(c => c.id === active);
+
+  const html = `
+    <div style="margin-bottom:24px;">
+      <h2 style="font-size:22px;margin-bottom:8px;">✨ Inspiration</h2>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;">Thumbnail reference from creators we study</p>
+      <div class="strategy-tabs">${tabs}</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span style="font-size:13px;color:var(--text-secondary);">Showing <strong>${channel.name}</strong> — ${channel.videos.length} recent videos</span>
+      <a href="${channel.url}" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;">Visit channel ↗</a>
+    </div>
+    <div class="inspo-grid" id="inspo-grid">
+      ${channel.videos.map(v => `
+        <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" class="inspo-card" title="${v.title}">
+          <div class="inspo-thumb">
+            <img src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" alt="${v.title}" loading="lazy">
+            <div class="inspo-play">▶</div>
+          </div>
+          <div class="inspo-title">${v.title}</div>
+        </a>
+      `).join('')}
+    </div>
+  `;
+
+  container.innerHTML = html;
+
+  container.querySelectorAll('[data-intab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.inspoTab = btn.dataset.intab;
+      renderInspiration();
     });
-  }
+  });
 }
 
 // Navigation
@@ -1040,7 +1096,7 @@ function navigate(page) {
   state.currentPage = page;
 
   if (page !== 'video') {
-    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', strategy: 'Strategy', network: 'Network', map: 'Market Map', workshop: 'Workshop' };
+    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', strategy: 'Strategy', network: 'Network', map: 'Market Map', workshop: 'Workshop', inspiration: 'Inspiration' };
     document.getElementById('page-title').textContent = titles[page] || 'FTS Hub';
   }
 }
@@ -1058,6 +1114,7 @@ function handleHash() {
     case 'network': renderNetwork(); break;
     case 'map': renderMarketMap(); break;
     case 'workshop': renderWorkshop(); break;
+    case 'inspiration': renderInspiration(); break;
   }
 }
 

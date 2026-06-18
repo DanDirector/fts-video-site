@@ -714,6 +714,25 @@ const DISCOVERY_QUEUE = [
   { id: 'dq11', task: 'Search by video format: "business class with points" / "how rich people travel"', desc: 'Our direct niche — see which creators dominate these searches', done: false }
 ];
 
+const MIND_GRENADES = [
+  { id: 'mg1', text: 'Travel content is not about travel. It\'s about freedom. Travel is just proof that freedom has been achieved.' },
+  { id: 'mg2', text: 'Your channel doesn\'t sell points and miles. It sells the question: "What would you do if you could leave tomorrow?"' },
+  { id: 'mg3', text: 'The opposite of "travel hacking" isn\'t "paying full price." It\'s "not traveling at all because you\'re trapped in a system."' },
+  { id: 'mg4', text: 'People don\'t want a cheaper flight. They want a life where the flight doesn\'t matter.' },
+  { id: 'mg5', text: 'Lifestyle Design is the category. Travel is the evidence. Freedom is the product.' },
+  { id: 'mg6', text: 'You\'re not competing with other travel channels. You\'re competing with the belief that this lifestyle is unattainable.' },
+  { id: 'mg7', text: 'Tim Ferriss sells the "how." You sell the "how to pay for it." Together they\'re unstoppable.' }
+];
+
+const POSITIONING_STATEMENT = [
+  'We are not Tim Ferriss — we are more practical and more premium.',
+  'We are not Hormozi — we don\'t sell the cult of grind.',
+  'We are not a luxury travel blog — we talk to entrepreneurs, not tourists.',
+  'We are not a points nerd channel — we sell a lifestyle, not miles.'
+];
+
+const CORE_PHRASE = 'A channel about how an entrepreneur designs their life as a premium system.';
+
 const PODCAST_DATA = {
   shows: [
     {
@@ -812,3 +831,64 @@ const PODCAST_DATA = {
     { id: 'leila', name: 'Leila Hormozi', handle: '@LeilaHormozi', bio: 'CEO of Acquisition.com, business scaler', avatar: 'https://picsum.photos/seed/leilahormozi/64', connects: ['hormozi'] }
   ]
 };
+
+const INSPIRATION_CHANNELS = [
+  {
+    id: 'taki',
+    name: 'Taki Moore',
+    url: 'https://www.youtube.com/@TakiMoore',
+    videos: [
+      { id: 'm73yaCnF-IQ', title: 'How to Sell Out Next Month\'s Inventory This Month' },
+      { id: 'Nq60I3qICIY', title: 'Copy This YouTube System. It Made Me $5 Million.' },
+      { id: 'sDwxgOg4s-U', title: 'Ryan Deiss Turned Off $150K/Month in Ad Spend (Sales Didn\'t Change)' },
+      { id: 'p0K3GdIqNqA', title: 'How to Create a Client Workshop in 22 Minutes' },
+      { id: 'HORHcupwW60', title: 'From Poverty & Former Dentist to Millionaire Coach in 2 Years' },
+      { id: 'iB6Zq2o7JrY', title: 'How to Create Content So Good You Never Have to Sell Again' },
+      { id: '6HAQC0CAIRs', title: 'How to Double a $300K/Month Business Without Burnout' },
+      { id: '_fK5FnyrQ3Q', title: 'To Hit $100K/Month Don\'t Change Your Product — Change This' },
+      { id: 'q_acWli_3ZA', title: 'The Day You Stop Copying Everyone Else, Your Sales Explode' },
+      { id: 'NNisnhY_drA', title: 'I Was Poisoned… My Clients Took Over Everything' },
+      { id: 'AGhYCxK9C0Y', title: 'How My Content Generates $1.7M/Month (No Ads, No Viral)' },
+      { id: 'Eq0nlMdmaFc', title: 'How I Generated 1,256 Qualified Leads in 48 Hours for $0.27' },
+      { id: '-y4MKkbXc3M', title: 'How I Make My Clients Rich Against Their Will' },
+      { id: '-L98xSoXN2k', title: 'Stop Running Your Business on Hard Mode (6 Cheat Codes for 2026)' },
+      { id: '76d6RlRj2Yk', title: 'Help Ali Abdaal Get $5 Million' },
+      { id: 'iuN9dRhaku8', title: 'How I Sold Out My $30K Program 7 Months in a Row (Steal This)' },
+      { id: 'MdNIaBz1X6A', title: 'How I Make $1.6M/Month (No Sales Calls)' },
+      { id: '6JKJpLziMnY', title: 'How Maria Wendt Went From $63 to $1M' },
+      { id: 'BXvcIQUNHJ4', title: 'Personal Brand Expert Reviews My 2026 Content Strategy' },
+      { id: 'dM9VRpb2IAs', title: 'Why Some Coaches Get Richer (While Most Struggle)' }
+    ]
+  },
+  {
+    id: 'matt',
+    name: 'Matt Gray',
+    url: 'https://www.youtube.com/@realmattgray',
+    videos: [
+      { id: 'iPBVAKDa7FA', title: 'I Built a Complete Operating System for a $4M Business' },
+      { id: 'kCSV-WZEu9s', title: 'How to Build a Personal Brand So Influential People Beg You to Buy' },
+      { id: 'WA3xMnN8kA0', title: 'I Built a Social Media System for a $7M Roofing Founder' },
+      { id: 'XWOsLExQeVM', title: 'How to Become So Magnetic Clients Chase You' },
+      { id: '3Bfx4osqbfE', title: 'I Built a Full "Business Operating System" Using Claude Code' },
+      { id: 'I4WNDfPf1_Y', title: 'If Your Content Gets Views But No Clients, Do This' },
+      { id: 'NMQ8CkBXrSA', title: 'If You Think Like an Artist, You Become Impossible to Ignore' },
+      { id: 'rkGLJybQDq4', title: 'How I Became Consistently Profitable (Founder OS Code)' },
+      { id: 'mUBomP0Kpcg', title: 'Why Your Content Gets Views But Makes $0.00 (How to Fix It)' },
+      { id: 'oOQQP5Yi6Yg', title: 'How to Plan Content for an Entire Month (7 Steps)' },
+      { id: 'se4rp_VAUMk', title: 'How I Automate 97% of My Business with AI' },
+      { id: '6AAjWeffBdI', title: 'If You Think I Have It "Figured Out", Watch This' },
+      { id: '5BDL8VHp2W0', title: 'How to Build a Marketing Team in 2026' },
+      { id: 'g_5tVc9koJI', title: 'How to Turn Views Into Clients So Fast It Feels Illegal' },
+      { id: '7c_vMHVq6io', title: 'The Psychology of Selling Anything' },
+      { id: 'q7PGsuqjQdE', title: '5 Levels of Discipline (Most People Stop at Level 1)' },
+      { id: '7KnIaB5GTDA', title: 'If I Wanted to Build a Personal Brand in 2026, I\'d Do This' },
+      { id: 's97eNGNLLmQ', title: '90% of You Are Not Ready to Compete with AI' },
+      { id: 'ohqjbfLj-6o', title: 'The Genius Decision Most Founders Are Too Scared to Make' },
+      { id: 'Pv-Bi6etxr0', title: 'The Secret to Scaling a Business Without Losing Yourself' },
+      { id: 'GxR4JS5nE0U', title: 'How I Would Start & Scale a Profitable Business in 2026' },
+      { id: 'kb8ev3x6Kf0', title: 'How to Grow Your Business Through Personal Brand' },
+      { id: '7rdhtqSz0O8', title: 'The Personal Brand Strategy That Makes Them Beg to Buy' },
+      { id: '5Gbkd7xp6Mg', title: 'What Makes You Irreplaceable When AI Destroys Most Businesses' }
+    ]
+  }
+];
