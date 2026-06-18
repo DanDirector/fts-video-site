@@ -1,7 +1,8 @@
 const state = {
   currentPage: 'dashboard',
   currentVideo: null,
-  filter: 'all'
+  filter: 'all',
+  strategyTab: 'category'
 };
 
 function getChannel(id) {

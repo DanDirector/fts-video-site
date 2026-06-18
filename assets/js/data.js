@@ -269,6 +269,20 @@ const STRATEGY = {
       philosophy: 'Scale aggressively. Raise capital. Think like a unicorn founder. High growth, big bets, venture-backed execution.',
       color: '#ff6b6b'
     }
+  ],
+  stages: [
+    { id: 'aspiring', name: 'Aspiring', icon: '🌱', desc: 'Getting started, learning the ropes' },
+    { id: 'early', name: 'Early Stage', icon: '🏗️', desc: 'Building the first business, finding product-market fit' },
+    { id: 'growth', name: 'Growth', icon: '📈', desc: 'Scaling, systematizing, building teams' },
+    { id: 'exit', name: 'Exit / Freedom', icon: '🌴', desc: 'Selling, automating, living off systems' },
+    { id: 'investor', name: 'Investor', icon: '💎', desc: 'Capital allocation, buying assets, wealth preservation' }
+  ],
+  topics: [
+    { id: 'marketing', name: 'Marketing & Sales', icon: '📣', desc: 'Customer acquisition, offers, funnels, branding' },
+    { id: 'ops', name: 'Ops & Systems', icon: '⚙️', desc: 'Automation, SOPs, outsourcing, workflows' },
+    { id: 'mindset', name: 'Mindset & Philosophy', icon: '🧠', desc: 'Discipline, habits, mental models, decision-making' },
+    { id: 'content', name: 'Content & Media', icon: '🎬', desc: 'YouTube, podcasting, audience building, storytelling' },
+    { id: 'finance', name: 'Finance & Capital', icon: '💰', desc: 'Fundraising, credit, investing, cash flow management' }
   ]
 };
 
@@ -277,47 +291,47 @@ const MOCK_DATA = {
     {
       id: 'ch1', name: 'Tim Ferriss', handle: '@timferriss',
       avatar: 'https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle'
+      subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle', stage: 'exit', topic: 'mindset'
     },
     {
       id: 'ch2', name: 'My First Million', handle: '@MyFirstMill',
       avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle'
+      subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle', stage: 'growth', topic: 'content'
     },
     {
       id: 'ch3', name: 'Noah Kagan', handle: '@noahkagan',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle'
+      subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle', stage: 'aspiring', topic: 'marketing'
     },
     {
       id: 'ch4', name: 'Alex Hormozi', handle: '@AlexHormozi',
       avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle'
+      subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing'
     },
     {
       id: 'ch5', name: 'Gary Vaynerchuk', handle: '@GaryVee',
       avatar: 'https://yt3.googleusercontent.com/w1ZE9_lO_kpwrA9y_jL66Cqf8tYJ1uKGdmtxAmiik4ARBBDeB5wfyYOyhpcJ_qNaPajOAHbADA=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle'
+      subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing'
     },
     {
       id: 'ch6', name: 'Codie Sanchez', handle: '@CodieSanchez',
       avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition'
+      subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition', stage: 'growth', topic: 'finance'
     },
     {
       id: 'ch7', name: 'Ali Abdaal', handle: '@aliabdaal',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_m2xx6mCZwsyjARnkwBKJxEv0FqGxGS2NwWNkjWH__Smw=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator'
+      subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator', stage: 'aspiring', topic: 'content'
     },
     {
       id: 'ch8', name: 'Colin and Samir', handle: '@colinandsamir',
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_k-3YijnZNqr_9SNBOzN2sFB3xJ6SrHy9q3LJ0b1HApVHI=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator'
+      subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator', stage: 'growth', topic: 'content'
     },
     {
       id: 'ch9', name: 'Y Combinator', handle: '@ycombinator',
       avatar: 'https://yt3.googleusercontent.com/dGyATx87Fp_s1nZvnupUFSnMqbAPZ6nqRby9Esk1m6YE41iBq-9Z8iGoIgHTCT9SiDBUpP2V=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup'
+      subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup', stage: 'growth', topic: 'finance'
     }
   ],
 
