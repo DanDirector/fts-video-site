@@ -306,6 +306,15 @@ const STRATEGY = {
     { id: 'rant', name: 'Rants & Talks', icon: '🎤', desc: 'Long-form opinions and Q&As', color: '#ff6b6b' },
     { id: 'personal_story', name: 'Personal Journey', icon: '📖', desc: 'First-person experience', color: '#74b9ff' },
     { id: 'breakdown', name: 'Breakdowns', icon: '🔍', desc: 'Deconstructing what works', color: '#e17055' }
+  ],
+  churches: [
+    { id: 'grind', name: 'The Grind Church', icon: '🔥', desc: 'The world belongs to those who work the hardest', philosophy: 'They sell strength, discipline, aggression, scale.', color: '#ff6b6b' },
+    { id: 'freedom', name: 'The Freedom Architects', icon: '🌴', desc: 'Business should buy you life, not burn it', philosophy: 'They sell systems, remote work, freedom, intentional life design.', color: '#6c5ce7' },
+    { id: 'cashflow', name: 'The Cashflow Owners', icon: '🏗️', desc: 'Wealth is not salary — wealth is owning assets', philosophy: 'They sell boring businesses, real estate, equity, cashflow.', color: '#00d68f' },
+    { id: 'startup', name: 'The Startup Prophets', icon: '🚀', desc: 'Small is too small — build a company that changes markets', philosophy: 'They sell scale, venture capital, technology, mission.', color: '#ffaa00' },
+    { id: 'creator', name: 'The Creator Capitalists', icon: '🎬', desc: 'Attention is the new capital', philosophy: 'They sell personal brand, audience, content machine.', color: '#74b9ff' },
+    { id: 'luxury', name: 'The Luxury Proof', icon: '✨', desc: 'Success should be visible', philosophy: 'They sell cars, hotels, jets, villas, the premium world.', color: '#e17055' },
+    { id: 'premium_freedom', name: 'The Premium Freedom Operator', icon: '💎', desc: 'You don\'t need to be a billionaire to live at another level', philosophy: 'They sell turning money, credit, points, and systems into a premium life.', color: '#00cec9' }
   ]
 };
 
@@ -313,75 +322,179 @@ const MOCK_DATA = {
   channels: [
     {
       id: 'ch1', name: 'Tim Ferriss', handle: '@timferriss',
+      church: 'freedom',
+      mapPosition: { x: 92, y: 82 },
+      mapStyle: { x: 25, y: 30 },
+      mapPromise: { x: 95, y: 30 },
       avatar: 'https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle', stage: 'exit', topic: 'mindset',
       promise: 'How to design a life of freedom', enemy: 'The 9-5 grind, busywork, trading time for money',
       hero: 'Lifestyle entrepreneur who works 4 hours', philosophy: 'build_systems',
-      successSymbol: 'freedom', proofFormat: 'personal_story'
+      successSymbol: 'freedom', proofFormat: 'personal_story',
+      tone: 'Intellectual, calm, exploratory',
+      weakness: 'Can be too philosophical — lacks direct business mechanics',
+      opportunity: 'Take the freedom & lifestyle angle, add concrete systems: points, cards, hotels, flights, concierge',
+      affinities: [
+        { id: 'ch3', type: 'collab', strength: 0.9, label: 'Noah was a guest' },
+        { id: 'ch2', type: 'shared_philosophy', strength: 0.7, label: 'Lifestyle Design' }
+      ]
     },
     {
       id: 'ch2', name: 'My First Million', handle: '@MyFirstMill',
+      church: 'creator',
+      mapPosition: { x: 55, y: 52 },
+      mapStyle: { x: 40, y: 35 },
+      mapPromise: { x: 60, y: 50 },
       avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle', stage: 'growth', topic: 'content',
       promise: 'Business ideas you haven\'t thought of', enemy: 'Boring jobs, lack of creativity, missed opportunities',
       hero: 'Curious entrepreneur always exploring', philosophy: 'build_audience',
-      successSymbol: 'influence', proofFormat: 'breakdown'
+      successSymbol: 'influence', proofFormat: 'breakdown',
+      tone: 'Casual, energetic, banter-heavy',
+      weakness: 'Ideas-heavy but shallow on execution mechanics',
+      opportunity: 'Curate their best ideas and show exactly how to fund them via points/travel systems',
+      affinities: [
+        { id: 'ch3', type: 'collab', strength: 0.85, label: 'Noah was a guest' },
+        { id: 'ch6', type: 'collab', strength: 0.8, label: 'Codie was a guest' },
+        { id: 'ch4', type: 'mentions', strength: 0.5, label: 'Cite Hormozi' },
+        { id: 'ch1', type: 'shared_philosophy', strength: 0.6, label: 'Lifestyle Design' }
+      ]
     },
     {
       id: 'ch3', name: 'Noah Kagan', handle: '@noahkagan',
+      church: 'freedom',
+      mapPosition: { x: 68, y: 58 },
+      mapStyle: { x: 65, y: 30 },
+      mapPromise: { x: 70, y: 35 },
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle', stage: 'aspiring', topic: 'marketing',
       promise: 'How to start and grow a business without bullshit', enemy: 'Overthinking, perfectionism, fear',
       hero: 'Action-taker who ships fast', philosophy: 'build_systems',
-      successSymbol: 'freedom', proofFormat: 'case_study'
+      successSymbol: 'freedom', proofFormat: 'case_study',
+      tone: 'Blunt, humorous, no-fluff',
+      weakness: 'Focuses on low-ticket products — misses high-ticket travel/lifestyle angle',
+      opportunity: 'Pair his no-bs action framework with luxury travel rewards — "start a business AND fly first class"',
+      affinities: [
+        { id: 'ch1', type: 'collab', strength: 0.9, label: 'Guest on TF show' },
+        { id: 'ch2', type: 'collab', strength: 0.85, label: 'Guest on MFM' },
+        { id: 'ch6', type: 'collab', strength: 0.6, label: 'Codie on his show' }
+      ]
     },
     {
       id: 'ch4', name: 'Alex Hormozi', handle: '@AlexHormozi',
+      church: 'grind',
+      mapPosition: { x: 8, y: 12 },
+      mapStyle: { x: 90, y: 20 },
+      mapPromise: { x: 10, y: 75 },
       avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing',
       promise: 'How to make your first $100M', enemy: 'Bad offers, weak pricing, poor execution',
       hero: 'Relentless businessman who wins at any cost', philosophy: 'outwork',
-      successSymbol: 'money', proofFormat: 'numbers'
+      successSymbol: 'money', proofFormat: 'numbers',
+      tone: 'Intense, direct, zero-fluff',
+      weakness: 'All about work — no lifestyle design, no freedom angle',
+      opportunity: 'Bridge his business scaling advice with "now enjoy the profits via luxury travel" — the reward after the grind',
+      affinities: [
+        { id: 'ch6', type: 'collab', strength: 0.8, label: 'Codie was a guest' },
+        { id: 'ch5', type: 'shared_philosophy', strength: 0.7, label: 'Both Hustle' },
+        { id: 'ch9', type: 'compared', strength: 0.4, label: 'Compared by viewers' }
+      ]
     },
     {
       id: 'ch5', name: 'Gary Vaynerchuk', handle: '@GaryVee',
+      church: 'grind',
+      mapPosition: { x: 15, y: 28 },
+      mapStyle: { x: 50, y: 25 },
+      mapPromise: { x: 20, y: 65 },
       avatar: 'https://yt3.googleusercontent.com/w1ZE9_lO_kpwrA9y_jL66Cqf8tYJ1uKGdmtxAmiik4ARBBDeB5wfyYOyhpcJ_qNaPajOAHbADA=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle', stage: 'early', topic: 'marketing',
       promise: 'How to win in business through patience and hard work', enemy: 'Short-term thinking, laziness, excuses',
       hero: 'Long-term obsessed executor', philosophy: 'outwork',
-      successSymbol: 'influence', proofFormat: 'rant'
+      successSymbol: 'influence', proofFormat: 'rant',
+      tone: 'Loud, passionate, motivational',
+      weakness: 'High energy, low specific systems — "just work harder" gets old',
+      opportunity: 'Channel his "document don\'t create" philosophy into travel content — show the lifestyle that makes the hustle worth it',
+      affinities: [
+        { id: 'ch4', type: 'shared_philosophy', strength: 0.7, label: 'Both Hustle' },
+        { id: 'ch7', type: 'compared', strength: 0.3, label: 'Content style compared' }
+      ]
     },
     {
       id: 'ch6', name: 'Codie Sanchez', handle: '@CodieSanchez',
+      church: 'cashflow',
+      mapPosition: { x: 72, y: 50 },
+      mapStyle: { x: 60, y: 35 },
+      mapPromise: { x: 75, y: 40 },
       avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition', stage: 'growth', topic: 'finance',
       promise: 'How to get rich buying boring businesses', enemy: 'Startup hype, get-rich-quick, gambling on crypto',
       hero: 'Smart investor who buys cash-flow assets', philosophy: 'buy_assets',
-      successSymbol: 'freedom', proofFormat: 'case_study'
+      successSymbol: 'freedom', proofFormat: 'case_study',
+      tone: 'Warm, smart, contrarian',
+      weakness: 'Focuses on acquisition, but misses the lifestyle reward side',
+      opportunity: 'Show how cash-flow from boring businesses funds first-class travel — bridge acquisition and lifestyle',
+      affinities: [
+        { id: 'ch2', type: 'collab', strength: 0.8, label: 'Guest on MFM' },
+        { id: 'ch4', type: 'collab', strength: 0.8, label: 'Guest on Hormozi' },
+        { id: 'ch3', type: 'collab', strength: 0.6, label: 'Guest on Noah Kagan' }
+      ]
     },
     {
       id: 'ch7', name: 'Ali Abdaal', handle: '@aliabdaal',
+      church: 'creator',
+      mapPosition: { x: 62, y: 78 },
+      mapStyle: { x: 55, y: 25 },
+      mapPromise: { x: 70, y: 25 },
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_m2xx6mCZwsyjARnkwBKJxEv0FqGxGS2NwWNkjWH__Smw=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator', stage: 'aspiring', topic: 'content',
       promise: 'How to be productive and happy', enemy: 'Burnout, stress, working harder not smarter',
       hero: 'Fulfilled creator who works smart', philosophy: 'build_audience',
-      successSymbol: 'peace', proofFormat: 'personal_story'
+      successSymbol: 'peace', proofFormat: 'personal_story',
+      tone: 'Calm, friendly, practical',
+      weakness: 'Very UK/moderate — lacks the "luxury / freedom" edge',
+      opportunity: 'Add his productivity systems to travel hacking — "be productive AND fly first class while doing it"',
+      affinities: [
+        { id: 'ch8', type: 'shared_philosophy', strength: 0.8, label: 'Both Creator Economy' },
+        { id: 'ch5', type: 'compared', strength: 0.3, label: 'Audience overlap' }
+      ]
     },
     {
       id: 'ch8', name: 'Colin and Samir', handle: '@colinandsamir',
+      church: 'creator',
+      mapPosition: { x: 42, y: 48 },
+      mapStyle: { x: 45, y: 40 },
+      mapPromise: { x: 45, y: 45 },
       avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_k-3YijnZNqr_9SNBOzN2sFB3xJ6SrHy9q3LJ0b1HApVHI=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator', stage: 'growth', topic: 'content',
       promise: 'How to build a creator business', enemy: 'Traditional media, gatekeepers, old models',
       hero: 'Professional creator who treats it as a business', philosophy: 'build_audience',
-      successSymbol: 'influence', proofFormat: 'interview'
+      successSymbol: 'influence', proofFormat: 'interview',
+      tone: 'Analytical, insider, industry-focused',
+      weakness: 'Creator-economy focused — no lifestyle design or personal freedom angle',
+      opportunity: 'Bridge their creator-business insights with travel perks — "build a creator business that lets you work from anywhere"',
+      affinities: [
+        { id: 'ch7', type: 'shared_philosophy', strength: 0.8, label: 'Both Creator Economy' },
+        { id: 'ch9', type: 'mentions', strength: 0.4, label: 'Mention YC startups' }
+      ]
     },
     {
       id: 'ch9', name: 'Y Combinator', handle: '@ycombinator',
+      church: 'startup',
+      mapPosition: { x: 22, y: 22 },
+      mapStyle: { x: 70, y: 20 },
+      mapPromise: { x: 15, y: 15 },
       avatar: 'https://yt3.googleusercontent.com/dGyATx87Fp_s1nZvnupUFSnMqbAPZ6nqRby9Esk1m6YE41iBq-9Z8iGoIgHTCT9SiDBUpP2V=s176-c-k-c0x00ffffff-no-rj',
       subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup', stage: 'growth', topic: 'finance',
       promise: 'How to build a startup that matters', enemy: 'Bad ideas, slow execution, not raising enough',
       hero: 'Ambitious founder changing the world', philosophy: 'scale_capital',
-      successSymbol: 'power', proofFormat: 'interview'
+      successSymbol: 'power', proofFormat: 'interview',
+      tone: 'Academic, authoritative, founder-focused',
+      weakness: 'Pure startup — zero lifestyle application',
+      opportunity: 'Show YC founders how to use travel systems to optimize their time — "raise money AND fly there first class"',
+      affinities: [
+        { id: 'ch4', type: 'compared', strength: 0.4, label: 'Compared by viewers' },
+        { id: 'ch8', type: 'mentions', strength: 0.3, label: 'Mentioned by C&S' }
+      ]
     }
   ],
 
@@ -584,5 +697,118 @@ const MOCK_DATA = {
     { id: 'm1', name: 'Danil', color: '#6c5ce7', initials: 'D' },
     { id: 'm2', name: 'Eli', color: '#00d68f', initials: 'E' },
     { id: 'm3', name: 'Avery', color: '#ffaa00', initials: 'A' }
+  ]
+};
+
+const DISCOVERY_QUEUE = [
+  { id: 'dq1', task: 'Search "business freedom lifestyle" on YouTube', desc: 'Find channels that talk about both business and lifestyle design — potential competitors and collaborators', done: false },
+  { id: 'dq2', task: 'Find who Tim Ferriss mentions most in his podcast', desc: 'Look at Tim\'s most common guests and references — these are key affinity targets', done: false },
+  { id: 'dq3', task: 'Search "travel hacking" + "business" + "entrepreneur"', desc: 'Find creators who bridge travel content and business content — our niche', done: false },
+  { id: 'dq4', task: 'Check recommended channels on MFM and Hormozi videos', desc: 'YouTube sidebar recommendations reveal direct audience overlap', done: false },
+  { id: 'dq5', task: 'Look for "credit cards for businesses" creators', desc: 'Financial tools niche — could complement our points/miles content', done: false },
+  { id: 'dq6', task: 'Find books cited by Tim Ferriss and Noah Kagan', desc: 'Authors they quote often become guests and collaborators', done: false },
+  { id: 'dq7', task: 'Search by video format: "I built a business in 30 days"', desc: 'Find channels that keep appearing in these search clusters — they share audience', done: false },
+  { id: 'dq8', task: 'Search by video format: "how I make $100k/month"', desc: 'Income-specific content reveals aspirational creators in our space', done: false },
+  { id: 'dq9', task: 'Search by video format: "how to escape the 9-5"', desc: 'Freedom-seeking audience — directly overlaps with Lifestyle Design positioning', done: false },
+  { id: 'dq10', task: 'Search by video format: "boring business ideas" / "buying a small business"', desc: 'Codie Sanchez territory — acquisition entrepreneurs', done: false },
+  { id: 'dq11', task: 'Search by video format: "business class with points" / "how rich people travel"', desc: 'Our direct niche — see which creators dominate these searches', done: false }
+];
+
+const PODCAST_DATA = {
+  shows: [
+    {
+      id: 'tf',
+      name: 'The Tim Ferriss Show',
+      host: 'Tim Ferriss',
+      avatar: 'https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s176-c-k-c0x00ffffff-no-rj',
+      category: 'lifestyle',
+      philosophy: 'build_systems',
+      episodes: [
+        { guest: 'naval', title: 'Naval Ravikant on Happiness, Wealth, and Peace', views: '8.2M' },
+        { guest: 'huberman', title: 'Andrew Huberman on Sleep, Performance, and Stress', views: '6.5M' },
+        { guest: 'noah', title: 'Noah Kagan on Starting Businesses and Saying No', views: '1.8M' }
+      ]
+    },
+    {
+      id: 'mfm',
+      name: 'My First Million',
+      host: 'Sam Parr & Shaan Puri',
+      avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
+      category: 'lifestyle',
+      philosophy: 'build_audience',
+      episodes: [
+        { guest: 'noah', title: 'Noah Kagan: The $100M Mistake', views: '1.2M' },
+        { guest: 'codie', title: 'Codie Sanchez: Buying Boring Businesses', views: '980K' },
+        { guest: 'sam', title: 'How Sam Parr Built The Hustle', views: '1.5M' }
+      ]
+    },
+    {
+      id: 'hormozi',
+      name: 'Alex Hormozi Podcast',
+      host: 'Alex Hormozi',
+      avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
+      category: 'hustle',
+      philosophy: 'outwork',
+      episodes: [
+        { guest: 'leila', title: 'Leila Hormozi on Building a $100M Portfolio', views: '3.2M' },
+        { guest: 'codie', title: 'Codie Sanchez: Acquisition Entrepreneur', views: '1.1M' }
+      ]
+    },
+    {
+      id: 'lex',
+      name: 'Lex Fridman Podcast',
+      host: 'Lex Fridman',
+      avatar: 'https://picsum.photos/seed/lexfridman/64',
+      category: 'startup',
+      philosophy: 'scale_capital',
+      episodes: [
+        { guest: 'naval', title: 'Naval Ravikant: The Enlightenment', views: '12M' },
+        { guest: 'sam', title: 'Sam Altman: OpenAI, AGI, Future', views: '9M' }
+      ]
+    },
+    {
+      id: 'doca',
+      name: 'Diary of a CEO',
+      host: 'Steven Bartlett',
+      avatar: 'https://picsum.photos/seed/stevenbartlett/64',
+      category: 'hustle',
+      philosophy: 'outwork',
+      episodes: [
+        { guest: 'huberman', title: 'Andrew Huberman: The Science of Success', views: '7M' },
+        { guest: 'naval', title: 'Naval: The Truth About Money', views: '5.2M' }
+      ]
+    },
+    {
+      id: 'noah',
+      name: 'Noah Kagan Presents',
+      host: 'Noah Kagan',
+      avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj',
+      category: 'lifestyle',
+      philosophy: 'build_systems',
+      episodes: [
+        { guest: 'codie', title: 'Buying Businesses with Codie Sanchez', views: '520K' },
+        { guest: 'naval', title: 'Naval on building wealth without luck', views: '890K' }
+      ]
+    },
+    {
+      id: 'chris',
+      name: 'Chris Williamson (Modern Wisdom)',
+      host: 'Chris Williamson',
+      avatar: 'https://picsum.photos/seed/chriswilliamson/64',
+      category: 'creator',
+      philosophy: 'build_audience',
+      episodes: [
+        { guest: 'huberman', title: 'Huberman: Optimize Your Brain', views: '4.1M' },
+        { guest: 'naval', title: 'Naval: The Overvalued Ego', views: '3.5M' }
+      ]
+    }
+  ],
+  guests: [
+    { id: 'naval', name: 'Naval Ravikant', handle: '@naval', bio: 'Angel investor, philosopher, co-founder of AngelList', avatar: 'https://picsum.photos/seed/naval/64', connects: ['tf', 'lex', 'doca', 'noah', 'chris'] },
+    { id: 'huberman', name: 'Andrew Huberman', handle: '@hubermanlab', bio: 'Neuroscientist, Stanford professor, host of Huberman Lab', avatar: 'https://picsum.photos/seed/huberman/64', connects: ['tf', 'doca', 'chris'] },
+    { id: 'noah', name: 'Noah Kagan', handle: '@noahkagan', bio: 'Founder of AppSumo, host of Noah Kagan Presents', avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj', connects: ['tf', 'mfm'] },
+    { id: 'codie', name: 'Codie Sanchez', handle: '@codie', bio: 'Founder of Contrarian Thinking, acquisition entrepreneur', avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj', connects: ['mfm', 'hormozi', 'noah'] },
+    { id: 'sam', name: 'Sam Parr', handle: '@thesamparr', bio: 'Founder of The Hustle, co-host of My First Million', avatar: 'https://picsum.photos/seed/samparr/64', connects: ['mfm', 'lex'] },
+    { id: 'leila', name: 'Leila Hormozi', handle: '@LeilaHormozi', bio: 'CEO of Acquisition.com, business scaler', avatar: 'https://picsum.photos/seed/leilahormozi/64', connects: ['hormozi'] }
   ]
 };
