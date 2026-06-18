@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTS Hub</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <span>F</span>
+        FTS Hub
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-page="dashboard" href="#dashboard">
+        <span class="icon">📊</span> Dashboard
+      </a>
+      <a class="nav-item" data-page="channels" href="#channels">
+        <span class="icon">📺</span> Channels
+        <span class="badge" id="channel-count">5</span>
+      </a>
+      <a class="nav-item" data-page="notes" href="#notes">
+        <span class="icon">📝</span> Notes
+        <span class="badge" id="notes-count">10</span>
+      </a>
+      <a class="nav-item" data-page="team" href="#team">
+        <span class="icon">👥</span> Team
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      FTS Hub v0.1 · Prototype
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="header-title" id="page-title">Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <div class="search-bar">
+          <span>🔍</span>
+          <input type="text" placeholder="Search videos, channels, notes..." id="search-input">
+        </div>
+        <div class="avatar">D</div>
+      </div>
+    </header>
+
+    <!-- Dashboard Page -->
+    <div class="page active" id="page-dashboard">
+      <div class="content">
+        <div id="dashboard-content"></div>
+      </div>
+    </div>
+
+    <!-- Channels Page -->
+    <div class="page" id="page-channels">
+      <div class="content">
+        <div id="channels-content"></div>
+      </div>
+    </div>
+
+    <!-- Notes Page -->
+    <div class="page" id="page-notes">
+      <div class="content">
+        <div id="notes-content"></div>
+      </div>
+    </div>
+
+    <!-- Team Page -->
+    <div class="page" id="page-team">
+      <div class="content">
+        <div id="team-content"></div>
+      </div>
+    </div>
+
+    <!-- Video Detail Page (hidden by default) -->
+    <div class="page" id="page-video">
+      <div class="video-page">
+        <div class="video-main">
+          <div class="video-player-placeholder">▶</div>
+          <div class="video-detail-title" id="video-detail-title"></div>
+          <div class="video-detail-meta" id="video-detail-meta"></div>
+          <div class="subtitles-section" id="subtitles-section">
+            <div class="subtitles-header">
+              <span>📝 Subtitles</span>
+              <span style="font-size:12px;color:var(--text-muted);font-weight:400;">click time to copy timestamp</span>
+            </div>
+            <div class="subtitles-list" id="subtitles-list"></div>
+          </div>
+        </div>
+        <div class="video-sidebar">
+          <div class="notes-section">
+            <div class="notes-header">💡 Team Notes</div>
+            <div id="notes-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
