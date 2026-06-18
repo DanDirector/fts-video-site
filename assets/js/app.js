@@ -238,25 +238,44 @@ function openVideo(id) {
 // Channels page
 function renderChannels() {
   const container = document.getElementById('channels-content');
-  let html = `<h2 style="margin-bottom:20px;">Tracked Channels</h2><div class="channels-grid">`;
+  const grouped = {};
 
   MOCK_DATA.channels.forEach(ch => {
-    const videoCount = MOCK_DATA.videos.filter(v => v.channelId === ch.id).length;
+    if (!grouped[ch.category]) grouped[ch.category] = [];
+    grouped[ch.category].push(ch);
+  });
+
+  let html = `<h2 style="margin-bottom:20px;">Tracked Channels</h2>`;
+
+  Object.keys(grouped).forEach(catId => {
+    const cat = STRATEGY.categories.find(c => c.id === catId);
+    if (!cat) return;
+    const channels = grouped[catId];
     html += `
-      <div class="channel-card" data-channel-id="${ch.id}">
-        <div class="channel-card-avatar">
-          <img src="${ch.avatar}" alt="">
+      <div class="channel-group" style="margin-top:24px;">
+        <div class="channel-group-header">
+          <span style="font-size:18px;">${cat.icon}</span>
+          <span class="channel-name">${cat.name}</span>
+          <span style="font-size:12px;color:var(--text-muted);margin-left:8px;">${cat.question}</span>
+          <span class="channel-subscribers">${channels.length} channels</span>
         </div>
-        <div class="channel-card-info">
-          <div class="channel-card-name">${ch.name}</div>
-          <div class="channel-card-meta">${ch.handle} · ${ch.subscribers} · ${ch.videos} videos</div>
-          <div class="channel-card-status">● ${videoCount} new</div>
+        <div class="channels-grid">
+          ${channels.map(ch => `
+            <div class="channel-card" data-channel-id="${ch.id}">
+              <div class="channel-card-avatar">
+                <img src="${ch.avatar}" alt="">
+              </div>
+              <div class="channel-card-info">
+                <div class="channel-card-name">${ch.name}</div>
+                <div class="channel-card-meta">${ch.handle} · ${ch.subscribers} · ${ch.videos} videos</div>
+              </div>
+            </div>
+          `).join('')}
         </div>
       </div>
     `;
   });
 
-  html += `</div>`;
   container.innerHTML = html;
 }
 
@@ -344,6 +363,55 @@ function renderTeam() {
   container.innerHTML = html;
 }
 
+// Strategy page
+function renderStrategy() {
+  const container = document.getElementById('strategy-content');
+  const s = STRATEGY;
+
+  const catCards = s.categories.map(c => `
+    <div class="strategy-card" style="border-top: 3px solid ${c.color};">
+      <div class="strategy-card-header">
+        <span style="font-size:24px;">${c.icon}</span>
+        <div>
+          <div class="strategy-card-name">${c.name}</div>
+          <div class="strategy-card-question">${c.question}</div>
+        </div>
+      </div>
+      <div class="strategy-card-body">
+        <p>${c.philosophy}</p>
+        <div style="margin-top:12px;">
+          ${MOCK_DATA.channels.filter(ch => ch.category === c.id).map(ch =>
+            `<span style="display:inline-flex;align-items:center;gap:6px;background:var(--bg-card);padding:4px 10px;border-radius:20px;font-size:12px;margin:3px;">
+              <img src="${ch.avatar}" style="width:18px;height:18px;border-radius:50%;"> ${ch.name}
+            </span>`
+          ).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  let html = `
+    <div style="margin-bottom:32px;">
+      <h2 style="font-size:22px;margin-bottom:8px;">🧠 Content Strategy</h2>
+      <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda and what we learn from each category</p>
+    </div>
+
+    <div class="strategy-positioning" style="border-left:4px solid ${s.positioning.color};">
+      <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Our Position</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:6px;">${s.positioning.title}</div>
+      <div style="font-size:14px;color:var(--accent);font-weight:500;margin-bottom:8px;">${s.positioning.subtitle}</div>
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;">${s.positioning.description}</p>
+    </div>
+
+    <div style="margin-top:32px;">
+      <h3 style="font-size:16px;margin-bottom:16px;color:var(--text-secondary);">Categories We Track</h3>
+      <div class="strategy-grid">${catCards}</div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
 // Navigation
 function navigate(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -358,7 +426,7 @@ function navigate(page) {
   state.currentPage = page;
 
   if (page !== 'video') {
-    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', team: 'Team' };
+    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', strategy: 'Strategy', team: 'Team' };
     document.getElementById('page-title').textContent = titles[page] || 'FTS Hub';
   }
 }
@@ -372,6 +440,7 @@ function handleHash() {
     case 'dashboard': renderDashboard(); break;
     case 'channels': renderChannels(); break;
     case 'notes': renderNotes(); break;
+    case 'strategy': renderStrategy(); break;
     case 'team': renderTeam(); break;
   }
 }

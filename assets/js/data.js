@@ -221,52 +221,103 @@ const CHANNEL_ANALYTICS = {
   }
 };
 
-const MOCK_DATA = {
-  channels: [
+const STRATEGY = {
+  positioning: {
+    title: 'Lifestyle Design',
+    subtitle: 'Не «как улететь бизнес-классом», а «как построить жизнь, где ты можешь улететь завтра утром»',
+    description: 'Ваш канал @elifacenda про мили и поинты — это не travel. Это про свободу. Путешествия — доказательство того, что система работает без тебя.',
+    color: '#6c5ce7'
+  },
+  categories: [
     {
-      id: 'ch1',
-      name: 'Alex Hormozi',
-      handle: '@AlexHormozi',
-      avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '4.2M',
-      videos: 1203,
+      id: 'lifestyle',
+      name: 'Lifestyle Design',
+      icon: '🌴',
+      question: 'Как жить лучше, а не как работать больше?',
+      philosophy: 'Строй систему, которая освободит тебя. Автоматизация, удалёнка, путешествия, аутсорсинг, свобода времени.',
       color: '#6c5ce7'
     },
     {
-      id: 'ch2',
-      name: 'Gary Vaynerchuk',
-      handle: '@GaryVee',
-      avatar: 'https://yt3.googleusercontent.com/w1ZE9_lO_kpwrA9y_jL66Cqf8tYJ1uKGdmtxAmiik4ARBBDeB5wfyYOyhpcJ_qNaPajOAHbADA=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '3.8M',
-      videos: 4502,
-      color: '#00d68f'
-    },
-    {
-      id: 'ch3',
-      name: 'My First Million',
-      handle: '@MyFirstMill',
-      avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '1.8M',
-      videos: 876,
+      id: 'hustle',
+      name: 'Hustle / Grind',
+      icon: '🔥',
+      question: 'Как больше пахать и больше зарабатывать?',
+      philosophy: 'Работай больше. Жалуйся меньше. Побеждай конкурентов. Пока остальные отдыхают — ты работаешь.',
       color: '#ffaa00'
     },
     {
-      id: 'ch4',
-      name: 'Simon Squibb',
-      handle: '@simonsquibb',
-      avatar: 'https://yt3.googleusercontent.com/P8IYVJC3neabqmVMHYq2uwaV7C-oCgsycY_mht8qYNNAMJc_8GycT8fJ8Vglrtlp51vpSJzeNQ=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '2.1M',
-      videos: 654,
-      color: '#ff6b6b'
+      id: 'acquisition',
+      name: 'Acquisition',
+      icon: '🏗️',
+      question: 'Как покупать готовые бизнесы?',
+      philosophy: 'Не строй с нуля — купи. Скучные бизнесы приносят лучшую прибыль. Купи денежную машину и масштабируй.',
+      color: '#00d68f'
     },
     {
-      id: 'ch5',
-      name: 'Codie Sanchez',
-      handle: '@CodieSanchez',
-      avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj',
-      subscribers: '2.5M',
-      videos: 987,
+      id: 'creator',
+      name: 'Creator Economy',
+      icon: '🎬',
+      question: 'Как превратить аудиторию в актив?',
+      philosophy: 'Контент — это новый капитал. Построй аудиторию, монетизируй внимание, создай медиа-актив.',
       color: '#74b9ff'
+    },
+    {
+      id: 'startup',
+      name: 'Startup / VC',
+      icon: '🚀',
+      question: 'Как построить компанию на миллиарды?',
+      philosophy: 'Масштабируйся агрессивно. Привлекай капитал. Мысли как основатель единорога.',
+      color: '#ff6b6b'
+    }
+  ]
+};
+
+const MOCK_DATA = {
+  channels: [
+    {
+      id: 'ch1', name: 'Tim Ferriss', handle: '@timferriss',
+      avatar: 'https://yt3.googleusercontent.com/g0hMq-enawYpZxujT3GcjHHLos3QXgUpwfOS20eCDVmCPUpLbtSkgu1VEjq_YiCU5bpZCT6_ID8=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '1.4M', videos: 312, color: '#6c5ce7', category: 'lifestyle'
+    },
+    {
+      id: 'ch2', name: 'My First Million', handle: '@MyFirstMill',
+      avatar: 'https://yt3.googleusercontent.com/zKI3aWmfoKkn1zZhwHAxp9KruXKFYKFuzW3jzQInHD34d15RaCZq-JMdjcP5dj9j3MW2horc=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '1.8M', videos: 876, color: '#6c5ce7', category: 'lifestyle'
+    },
+    {
+      id: 'ch3', name: 'Noah Kagan', handle: '@noahkagan',
+      avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_lEFPqTwyBwOrggOCPOGGnEyJ6s_SwGRPS150L8ZniCl1M=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '486K', videos: 231, color: '#6c5ce7', category: 'lifestyle'
+    },
+    {
+      id: 'ch4', name: 'Alex Hormozi', handle: '@AlexHormozi',
+      avatar: 'https://yt3.googleusercontent.com/29XFUn3pc3cC81yUUCFiyCKKdgi856IGMJ4EZBnf53zTfrWWUGvmYnYGx86K08f4XR03UxpWyw=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '4.2M', videos: 1203, color: '#ffaa00', category: 'hustle'
+    },
+    {
+      id: 'ch5', name: 'Gary Vaynerchuk', handle: '@GaryVee',
+      avatar: 'https://yt3.googleusercontent.com/w1ZE9_lO_kpwrA9y_jL66Cqf8tYJ1uKGdmtxAmiik4ARBBDeB5wfyYOyhpcJ_qNaPajOAHbADA=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '3.8M', videos: 4502, color: '#ffaa00', category: 'hustle'
+    },
+    {
+      id: 'ch6', name: 'Codie Sanchez', handle: '@CodieSanchez',
+      avatar: 'https://yt3.googleusercontent.com/N3r5vZaU8aNIMd2woKMWQK8_AW3JcDRpTTTeQzUWBUavdSwcHtHp2MP3d8g6CIUKDZDiIJ7BsQ=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '2.5M', videos: 987, color: '#00d68f', category: 'acquisition'
+    },
+    {
+      id: 'ch7', name: 'Ali Abdaal', handle: '@aliabdaal',
+      avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_m2xx6mCZwsyjARnkwBKJxEv0FqGxGS2NwWNkjWH__Smw=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '5.2M', videos: 456, color: '#74b9ff', category: 'creator'
+    },
+    {
+      id: 'ch8', name: 'Colin and Samir', handle: '@colinandsamir',
+      avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_k-3YijnZNqr_9SNBOzN2sFB3xJ6SrHy9q3LJ0b1HApVHI=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '1.1M', videos: 678, color: '#74b9ff', category: 'creator'
+    },
+    {
+      id: 'ch9', name: 'Y Combinator', handle: '@ycombinator',
+      avatar: 'https://yt3.googleusercontent.com/dGyATx87Fp_s1nZvnupUFSnMqbAPZ6nqRby9Esk1m6YE41iBq-9Z8iGoIgHTCT9SiDBUpP2V=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '1.6M', videos: 1204, color: '#ff6b6b', category: 'startup'
     }
   ],
 
