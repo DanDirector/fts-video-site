@@ -224,8 +224,8 @@ const CHANNEL_ANALYTICS = {
 const STRATEGY = {
   positioning: {
     title: 'Lifestyle Design',
-    subtitle: 'Не «как улететь бизнес-классом», а «как построить жизнь, где ты можешь улететь завтра утром»',
-    description: 'Ваш канал @elifacenda про мили и поинты — это не travel. Это про свободу. Путешествия — доказательство того, что система работает без тебя.',
+    subtitle: 'Not "how to fly business class" — but "how to build a life where you can fly tomorrow morning"',
+    description: 'Your @elifacenda channel is about miles and points — but it\'s not travel content. It\'s about freedom. Travel is just proof that the system works without you.',
     color: '#6c5ce7'
   },
   categories: [
@@ -233,40 +233,40 @@ const STRATEGY = {
       id: 'lifestyle',
       name: 'Lifestyle Design',
       icon: '🌴',
-      question: 'Как жить лучше, а не как работать больше?',
-      philosophy: 'Строй систему, которая освободит тебя. Автоматизация, удалёнка, путешествия, аутсорсинг, свобода времени.',
+      question: 'How to live better, not how to work more?',
+      philosophy: 'Build a system that sets you free. Automation, remote work, travel, outsourcing, time freedom. Don\'t build a business that becomes a second job.',
       color: '#6c5ce7'
     },
     {
       id: 'hustle',
       name: 'Hustle / Grind',
       icon: '🔥',
-      question: 'Как больше пахать и больше зарабатывать?',
-      philosophy: 'Работай больше. Жалуйся меньше. Побеждай конкурентов. Пока остальные отдыхают — ты работаешь.',
+      question: 'How to work harder and earn more?',
+      philosophy: 'Outwork everyone. Complain less. Win against competitors. While others rest — you work. Hustle culture, discipline, and relentless execution.',
       color: '#ffaa00'
     },
     {
       id: 'acquisition',
       name: 'Acquisition',
       icon: '🏗️',
-      question: 'Как покупать готовые бизнесы?',
-      philosophy: 'Не строй с нуля — купи. Скучные бизнесы приносят лучшую прибыль. Купи денежную машину и масштабируй.',
+      question: 'How to buy existing businesses?',
+      philosophy: 'Don\'t build from scratch — buy. Boring businesses bring the best returns. Buy a cash machine and scale it. No hype, just systems.',
       color: '#00d68f'
     },
     {
       id: 'creator',
       name: 'Creator Economy',
       icon: '🎬',
-      question: 'Как превратить аудиторию в актив?',
-      philosophy: 'Контент — это новый капитал. Построй аудиторию, монетизируй внимание, создай медиа-актив.',
+      question: 'How to turn audience into an asset?',
+      philosophy: 'Content is the new capital. Build an audience, monetize attention, create a media asset. Your followers are your moat.',
       color: '#74b9ff'
     },
     {
       id: 'startup',
       name: 'Startup / VC',
       icon: '🚀',
-      question: 'Как построить компанию на миллиарды?',
-      philosophy: 'Масштабируйся агрессивно. Привлекай капитал. Мысли как основатель единорога.',
+      question: 'How to build a billion-dollar company?',
+      philosophy: 'Scale aggressively. Raise capital. Think like a unicorn founder. High growth, big bets, venture-backed execution.',
       color: '#ff6b6b'
     }
   ]
