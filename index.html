@@ -20,28 +20,31 @@
       <a class="nav-item active" data-page="dashboard" href="#dashboard">
         <span class="icon">📊</span> Dashboard
       </a>
-      <a class="nav-item" data-page="channels" href="#channels">
-        <span class="icon">📺</span> Channels
-        <span class="badge" id="channel-count">9</span>
-      </a>
-      <a class="nav-item" data-page="notes" href="#notes">
-        <span class="icon">📝</span> Notes
-        <span class="badge" id="notes-count">8</span>
-      </a>
       <a class="nav-item" data-page="strategy" href="#strategy">
         <span class="icon">🧠</span> Strategy
       </a>
-      <a class="nav-item" data-page="network" href="#network">
-        <span class="icon">🔗</span> Network
+      <a class="nav-item" data-page="channels" href="#channels">
+        <span class="icon">📺</span> Channels
+        <span class="badge" id="channel-count">13</span>
       </a>
       <a class="nav-item" data-page="map" href="#map">
         <span class="icon">🗺️</span> Market Map
       </a>
-      <a class="nav-item" data-page="workshop" href="#workshop">
-        <span class="icon">🛠️</span> Workshop
+      <a class="nav-item" data-page="network" href="#network">
+        <span class="icon">🔗</span> Network
+      </a>
+      <a class="nav-item" data-page="meetings" href="#meetings">
+        <span class="icon">🤝</span> Team Meetings
       </a>
       <a class="nav-item" data-page="inspiration" href="#inspiration">
         <span class="icon">✨</span> Inspiration
+      </a>
+      <a class="nav-item" data-page="workshop" href="#workshop">
+        <span class="icon">🛠️</span> Workshop
+      </a>
+      <a class="nav-item" data-page="notes" href="#notes">
+        <span class="icon">📝</span> Notes
+        <span class="badge" id="notes-count">8</span>
       </a>
     </nav>
     <div class="sidebar-footer">
@@ -55,6 +58,7 @@
     <!-- Header -->
     <header class="header">
       <div class="header-left">
+        <button class="back-btn" id="back-btn" style="display:none;">←</button>
         <h1 class="header-title" id="page-title">Dashboard</h1>
       </div>
       <div class="header-right">
@@ -112,6 +116,13 @@
     <div class="page" id="page-map">
       <div class="content">
         <div id="map-content"></div>
+      </div>
+    </div>
+
+    <!-- Team Meetings Page -->
+    <div class="page" id="page-meetings">
+      <div class="content">
+        <div id="meetings-content"></div>
       </div>
     </div>
 

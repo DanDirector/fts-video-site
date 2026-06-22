@@ -2,7 +2,7 @@ const state = {
   currentPage: 'dashboard',
   currentVideo: null,
   filter: 'all',
-  strategyTab: 'category'
+  strategyTab: 'biggerworld'
 };
 
 function getChannel(id) {
@@ -231,8 +231,10 @@ function openVideo(id) {
     notesList.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px;">No notes yet</div>`;
   }
 
+  state.previousPage = state.currentPage;
   navigate('video');
   document.getElementById('page-title').textContent = v.title;
+  document.getElementById('back-btn').style.display = 'block';
 }
 
 // Channels page
@@ -588,45 +590,190 @@ function renderStrategyCards(dimension) {
 
 function renderStrategy() {
   const container = document.getElementById('strategy-content');
+  const active = state.strategyTab || 'overview';
+
+  const tabs = [
+    { id: 'biggerworld', label: 'The Bigger World', icon: '🌍' },
+    { id: 'generosity', label: 'Generosity', icon: '🎁' },
+    { id: 'overview', label: 'Drafts', icon: '🧠' },
+  ];
+
+  const tabsHtml = tabs.map(t =>
+    `<button class="strategy-tab ${active === t.id ? 'active' : ''}" data-stab="${t.id}">${t.icon} ${t.label}</button>`
+  ).join('');
+
   const s = STRATEGY;
 
-  const html = `
-    <div style="margin-bottom:32px;">
-      <h2 style="font-size:22px;margin-bottom:8px;">🧠 Content Strategy</h2>
-      <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda</p>
-    </div>
-    <div class="strat-block strat-block--lg">
-      <div class="strat-block-label">Our Position</div>
-      <div class="strat-block-title">${s.positioning.title}</div>
-      <div class="strat-block-sub">${s.positioning.subtitle}</div>
-      <p class="strat-block-body">${s.positioning.description}</p>
-    </div>
-    <div class="strat-block strat-block--md">
-      <div class="strat-block-label">🎯 Positioning</div>
-      ${POSITIONING_STATEMENT.map(s => `
-        <div style="display:flex;align-items:flex-start;gap:10px;${POSITIONING_STATEMENT.indexOf(s) < POSITIONING_STATEMENT.length - 1 ? 'margin-bottom:8px;' : ''}">
-          <span style="color:var(--accent);flex-shrink:0;margin-top:3px;">✦</span>
-          <span class="strat-block-body" style="margin:0;">${s}</span>
-        </div>
-      `).join('')}
-    </div>
-    <div class="strat-block strat-block--md">
-      <div class="strat-block-label">💎 Core Phrase</div>
-      <p class="strat-block-body" style="font-size:15px;font-weight:500;margin:0;">${CORE_PHRASE}</p>
-    </div>
-    <div style="margin-top:32px;">
-      <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">💡 Mind Grenades</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        ${MIND_GRENADES.map(g => `
-          <div class="strat-block strat-block--sm">
-            <span class="strat-block-body" style="margin:0;">${g.text}</span>
+  let contentHtml = '';
+
+  if (active === 'overview') {
+    contentHtml = `
+      <div class="strat-block strat-block--lg">
+        <div class="strat-block-label">Our Position</div>
+        <div class="strat-block-title">${s.positioning.title}</div>
+        <div class="strat-block-sub">${s.positioning.subtitle}</div>
+        <p class="strat-block-body">${s.positioning.description}</p>
+      </div>
+      <div class="strat-block strat-block--md">
+        <div class="strat-block-label">🎯 Positioning</div>
+        ${POSITIONING_STATEMENT.map(s => `
+          <div style="display:flex;align-items:flex-start;gap:10px;${POSITIONING_STATEMENT.indexOf(s) < POSITIONING_STATEMENT.length - 1 ? 'margin-bottom:8px;' : ''}">
+            <span style="color:var(--accent);flex-shrink:0;margin-top:3px;">✦</span>
+            <span class="strat-block-body" style="margin:0;">${s}</span>
           </div>
         `).join('')}
       </div>
+      <div class="strat-block strat-block--md">
+        <div class="strat-block-label">💎 Core Phrase</div>
+        <p class="strat-block-body" style="font-size:15px;font-weight:500;margin:0;">${CORE_PHRASE}</p>
+      </div>
+      <div style="margin-top:32px;">
+        <div style="font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">💡 Mind Grenades</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${MIND_GRENADES.map(g => `
+            <div class="strat-block strat-block--sm">
+              <span class="strat-block-body" style="margin:0;">${g.text}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  } else if (active === 'generosity') {
+    contentHtml = `
+      <div style="padding:60px 20px;text-align:center;color:var(--text-muted);">
+        <div style="font-size:40px;margin-bottom:12px;">🎁</div>
+        <h3 style="font-size:16px;color:var(--text-secondary);margin-bottom:6px;">Generosity</h3>
+        <p style="font-size:13px;">Content coming soon</p>
+      </div>
+    `;
+  } else if (active === 'biggerworld') {
+    contentHtml = renderBiggerWorld();
+  }
+
+  const html = `
+    <div style="margin-bottom:24px;">
+      <h2 style="font-size:22px;margin-bottom:8px;">🧠 Content Strategy</h2>
+      <p style="color:var(--text-secondary);font-size:14px;">How we position @elifacenda</p>
+      <div class="strategy-tabs" style="margin-top:12px;">${tabsHtml}</div>
     </div>
+    ${contentHtml}
   `;
 
   container.innerHTML = html;
+
+  container.querySelectorAll('[data-stab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.strategyTab = btn.dataset.stab;
+      renderStrategy();
+    });
+  });
+}
+
+function renderBiggerWorld() {
+  return `
+    <div class="strat-block strat-block--lg" style="margin-bottom:20px;">
+      <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">The Bigger World Strategy</h3>
+      <p class="strat-block-body">Eli's best travel content is not just about where he goes — it is about what he notices when he gets there. The cultures, the people, the rituals, the service, the conversations, the hidden business lessons inside a place. That is the larger opportunity for the channel: to show entrepreneurs that travel is not escape, but expansion. It is not time away from the business; it is access to bigger rooms, sharper people, new cultures, new ideas, and a larger map of the world. Points are simply the mechanism. The real product is access. The real content goal is to make entrepreneurs feel that the world is bigger than their calendar — and that their business should help them enter it.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">The Calendar Gets Bigger. The World Gets Smaller.</h3>
+      <p class="strat-block-body">We are not selling travel.<br><br>We are selling the expansion of the world.<br><br>Our audience is often successful on paper, yet trapped inside a surprisingly small reality: office → calls → meetings → team → growth → stress.<br><br>The calendar gets bigger.<br>The world gets smaller.<br><br>You didn't build a business just to answer emails from a slightly nicer desk.<br><br>You built it for access.<br><br>Access to places.<br>Access to cultures.<br>Access to experiences that change the way you see the world.<br><br>To take your family somewhere they'll remember for the rest of their lives.<br>To watch your kids experience Japan for the first time.<br>To sit in a café in Paris on a Tuesday and remember why you wanted freedom in the first place.<br><br>Because travel is not escape.<br>Travel is expansion.<br><br>The world is bigger than your calendar.<br><br>And Eli isn't just helping people book flights.<br>He's helping them reconnect with a bigger world.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">Global Leverage</h3>
+      <p class="strat-block-body">Most entrepreneurs hesitate to travel because it feels like stepping away from the business.<br><br>But the right trip is not a break from growth.<br>It is growth in a different form.<br><br>In an airport lounge, a first-class cabin, or the lobby of a five-star hotel, you enter rooms filled with people you may never reach from your office.<br><br>Founders. Investors. Creators. Operators. Coaches.<br><br>People whose one sentence can change how you see your entire business.<br><br>And then you land.<br><br>A new country.<br>A new language.<br>A new culture.<br>A new way of building trust, designing service, moving money, creating status, solving problems, and living life.<br><br>The world becomes a classroom you could never build at home.<br><br>Travel does not pull you away from your business.<br>It gives your business a larger map.<br><br>That is why points are not just a way to book better flights.<br>They are a way to buy access.<br><br>Access to people.<br>Access to cultures.<br>Access to ideas.<br>Access to a bigger game.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">How This Helps Sell the Product</h3>
+      <p class="strat-block-body">Culture creates desire.<br>Desire creates a dream.<br>The dream creates the question: "How do I get there?"<br><br>And this is where the product appears.<br><br>We should not begin only with the mechanics:<br><br>> Open this card.<br>> Transfer these points.<br>> Book this flight.<br><br>That is rational, but not always emotional.<br><br>Better:<br><br>> Imagine taking your family to Japan.<br>> Not "someday."<br>> Not "if the business grows another 3 times."<br>> But this year.<br>> And not economy for 14 hours.<br>> But calmly, beautifully, with the feeling that your business is finally working for your life.<br><br>This is the emotional bridge.<br><br>First, make them want the world.<br>Then show them how points can get them there.<br><br>Our product helps the entrepreneur get into the world.<br>Our content should first make him want to see that world.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">The Man Who Sees More</h3>
+      <p class="strat-block-body">This should not turn Eli into a professor.<br><br>He should never feel like someone reading facts from Wikipedia.<br><br>The power is not that he knows more.<br>The power is that he sees more.<br><br>He is a successful entrepreneur-traveler who notices what most people miss: how a culture builds trust, how a hotel designs status, how a country thinks about service, how people in different parts of the world create value, how one conversation in the right room can change the way you see business.<br><br>That makes him more than a "points guy."<br>It makes him a guide.<br><br>Not someone saying: "Look how much I know."<br>But someone saying: "Every time I travel, I realize how much more there is to understand."<br><br>This makes the brand feel curious, worldly, generous, sharp, and observant.<br><br>Eli should not come across as a rich guy flying business class.<br>He should come across as a businessman using travel to see the world more clearly.<br><br>The more he travels, the harder it becomes to believe there is only one way to live, build, think, sell, serve, or succeed.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">A Window Into Other Worlds</h3>
+      <p class="strat-block-body">YouTube works because it gives people access to worlds they do not normally enter.<br><br>That is exactly what our channel should do.<br><br>Not just teach people how to book flights.<br>Make them feel the world waiting on the other side.<br><br>People do not only watch to learn facts.<br>They watch to feel access — to places, people, cultures, lifestyles, and realities they do not normally experience.<br><br>That is why cultural moments can work so well for the channel.<br><br>They should not feel like Wikipedia facts.<br>They should feel like small story turns that make the viewer think: "I've never seen the world like that before."</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">Don't Explain the Place. Reveal It.</h3>
+      <p class="strat-block-body">The goal is not to add facts.<br>The goal is to make the viewer see a place differently.<br><br>A weak cultural insert sounds like Wikipedia:<br>> Japan is known for politeness and hospitality.<br><br>A strong one turns the place into an insight:<br>> In Japan, luxury doesn't scream. It whispers. It's in the silence of a train station. In the precision of a hotel lobby. In the way service feels designed before you even ask.<br><br>That is the rule: Do not describe the country. Reveal what it teaches.<br><br>Every place should become more than a destination. It should become a new way of seeing business, service, culture, money, beauty, trust, status, or life itself.<br><br>Avoid flat tourist clichés:<br>> Paris is romantic. Japan is polite. Dubai is rich. Italy has good food.<br><br>We need the non-obvious angle.<br><br>Not: Japan is very clean and people are respectful.<br>But: Japan makes you realize how powerful a society becomes when millions of tiny acts of consideration stack on top of each other.<br><br>Not: Italy has great food and architecture.<br>But: Italy reminds you that beauty does not have to be saved for special occasions. It can be part of lunch, a doorway, a street corner, a conversation.<br><br>Not: Dubai is luxurious.<br>But: Dubai is what happens when a place decides its identity will be built, not inherited.<br><br>This is the difference between travel content and perspective.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">The World Note</h3>
+      <p class="strat-block-body">Every time a video touches a country, city, culture, event, airport, hotel, or global experience, we should look for a short "World Note."<br><br>Not a random fact.<br>A small moment that makes the viewer feel like the world just got bigger.<br><br>The purpose is simple: Take a place they have heard of — and make them see it differently.<br><br>A World Note can be built from four pieces:<br><strong>Place → Detail → Meaning → Entrepreneurial insight</strong><br><br>Not: Japan is known for great service.<br>But: In Japan, luxury doesn't scream. It whispers. It's in the silence of a train station. In the precision of a hotel lobby. In the way service feels designed before you even ask. And as an entrepreneur, it makes you rethink what excellence actually looks like.<br><br>Not: Europe has a lot of history.<br>But: In Europe, history is not something you visit. It is something you walk through. It is in the train stations, the old hotels, the narrow streets, the way dinner can last three hours. It reminds you that not every culture is built around speed — and not every valuable thing is meant to scale fast.<br><br>Not: The World Cup brings many countries together.<br>But: The World Cup is one of the rare moments when the whole planet feels like one room. Different flags. Different languages. Different rituals. But one shared emotion. It reminds you that the world is not just markets and borders. It is people, pride, identity, and belonging.<br><br>These moments should be short: 10–25 seconds.<br>The goal is not to interrupt the video with education.<br>The goal is to make the viewer feel: "I've never thought about that place like this before."<br><br>That is the power of the World Note. It turns travel content into perspective.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">What This Place Teaches Entrepreneurs</h3>
+      <p class="strat-block-body">Every destination should teach something.<br><br>Not as a lesson. As a perspective.<br><br>A great travel video should never be just: "We went to Japan. We stayed in a beautiful hotel. We flew business class."<br><br>It should ask: What does this place reveal about business, service, money, culture, status, trust, beauty, speed, ambition, or life?<br><br>Japan can teach precision.<br>Italy can teach taste.<br>France can teach status.<br>Dubai can teach ambition.<br>Switzerland can teach trust.<br>London can teach global money.<br>Monaco can teach symbolic power.<br>Costa Rica can teach what life looks like outside the overheated race.<br><br>This makes every destination more than a backdrop. It becomes a lens.<br><br>Japan is not just a trip. It is a way to rethink service.<br>Italy is not just a vacation. It is a way to understand beauty as infrastructure.<br>Dubai is not just luxury. It is a way to see ambition built into the skyline.<br>Switzerland is not just clean and expensive. It is a way to understand why trust may be the ultimate luxury product.<br><br>This is how the channel becomes more than travel content. Every place gives the entrepreneur a new model for seeing the world.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">Cultural Hook</h3>
+      <p class="strat-block-body">The cultural idea can also become the hook of the video.<br><br>Instead of the usual beginning: "I flew business class to Japan using points…"<br><br>We can begin like this:<br>> Japan changed the way I think about luxury. Not because it was expensive. Because it was precise.<br><br>And then: "And the crazy part? This entire trip was booked using points."<br><br>This is much stronger than just "How I saved $14,000."<br><br>Because the cultural idea creates desire first. Then points become the mechanism of access.<br><br>That is the structure:<br><strong>Culture creates the emotion. Travel creates the dream. Points create the path.</strong></p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">Final Principle</h3>
+      <p class="strat-block-body">Points are not the product. Access is the product.<br><br>Access to places. Access to people. Access to cultures. Access to ideas. Access to a bigger life.<br><br>Luxury travel is not about flexing. It is about access.<br><br>The best ROI of travel is not the seat. It is the person you become after the trip.<br><br>The channel should not simply show entrepreneurs how to travel better. It should make them feel that their business was never supposed to trap them in one place. It was supposed to give them the world.</p>
+    </div>
+
+    <div class="strat-block strat-block--md">
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text-primary);">Core Lines We Should Protect</h3>
+      <p class="strat-block-body" style="line-height:2;font-size:14px;">
+        Travel is not escape. It's expansion.<br>
+        Points are how we get there. Curiosity is why we go.<br>
+        The world is bigger than your calendar.<br>
+        The world is bigger than your inbox.<br>
+        You didn't build a business to live in one place forever.<br>
+        You didn't build a business just to answer emails from a slightly nicer desk.<br>
+        The calendar gets bigger. The world gets smaller.<br>
+        Our product helps the entrepreneur get into the world. Our content should first make him want to see that world.<br>
+        We are not selling travel. We are selling the expansion of the world.<br>
+        Points are not the product. Access is the product.<br>
+        Luxury travel is not about flexing. It is about access.<br>
+        The best ROI of travel is not the seat. It is the person you become after the trip.<br>
+        Travel is not a break from business. It is growth in a different form.<br>
+        Travel does not pull you away from your business. It gives your business a larger map.<br>
+        You are not leaving your business. You are expanding the world your business thinks from.<br>
+        Travel is not leaving the business. Travel is entering bigger rooms.<br>
+        The world becomes a classroom you could never build at home.<br>
+        Every city teaches something.<br>
+        Every destination should teach something. Not as a lesson. As a perspective.<br>
+        Every place should become more than a destination. It should become a new way of seeing business, service, culture, money, beauty, trust, status, or life itself.<br>
+        Don't describe the country. Reveal what it teaches.<br>
+        Don't explain the place. Reveal it.<br>
+        Not a random fact. A small moment that makes the viewer feel like the world just got bigger.<br>
+        It turns travel content into perspective.<br>
+        Take a place they have heard of — and make them see it differently.<br>
+        A great travel video should not just show where someone went. It should reveal what the place changed in them.<br>
+        The power is not that Eli knows more. The power is that he sees more.<br>
+        Eli should not come across as a rich guy flying business class. He should come across as a businessman using travel to see the world more clearly.<br>
+        He is not just a points guy. He is a guide into a bigger world.<br>
+        The more he travels, the harder it becomes to believe there is only one way to live, build, think, sell, serve, or succeed.<br>
+        Culture creates desire. Desire creates a dream. The dream creates the question: "How do I get there?"<br>
+        First, make them want the world. Then show them how points can get them there.<br>
+        Culture creates the emotion. Travel creates the dream. Points create the path.<br>
+        YouTube works because it gives people access to worlds they do not normally enter.<br>
+        Make them feel the world waiting on the other side.<br>
+        People do not only watch to learn facts. They watch to feel access.<br>
+        Access to places. Access to people. Access to cultures. Access to ideas. Access to a bigger life.<br>
+        Airport lounges, first-class cabins, and five-star hotel lobbies are not just luxury spaces. They are rooms where rare people become reachable.<br>
+        The right trip can put you next to people you could never hire, never book, and never reach from your office.<br>
+        One conversation in the right room can change how you see your entire business.<br>
+        The point is not to travel more. The point is to think bigger.<br>
+        The business was never supposed to trap you in one place. It was supposed to give you the world.
+      </p>
+    </div>
+  `;
 }
 
 function getDiscoveryQueue() {
@@ -1039,37 +1186,66 @@ function renderMarketMap() {
 }
 
 // Inspiration
+const INSPIRATION_TABS = [
+  { id: 'thumbnails', type: 'thumbnails', name: 'YouTube Thumbnails' },
+  { id: 'reels', type: 'reels', name: 'Reels', data: INSPIRATION_REELS }
+];
+
 function renderInspiration() {
   const container = document.getElementById('inspiration-content');
-  const active = state.inspoTab || 'taki';
+  const active = state.inspoTab || 'thumbnails';
+  const tab = INSPIRATION_TABS.find(t => t.id === active) || INSPIRATION_TABS[0];
 
-  const tabs = INSPIRATION_CHANNELS.map(ch =>
-    `<button class="strategy-tab ${active === ch.id ? 'active' : ''}" data-intab="${ch.id}">${ch.name}</button>`
+  const tabsHtml = INSPIRATION_TABS.map(t =>
+    `<button class="strategy-tab ${active === t.id ? 'active' : ''}" data-intab="${t.id}">${t.name}</button>`
   ).join('');
 
-  const channel = INSPIRATION_CHANNELS.find(c => c.id === active);
+  let bodyHtml = '';
+
+  if (tab.type === 'thumbnails') {
+    bodyHtml = INSPIRATION_CHANNELS.map(ch => `
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:15px;font-weight:600;">${ch.name}</span>
+          <a href="${ch.url}" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;">Visit channel ↗</a>
+          <span style="font-size:12px;color:var(--text-muted);margin-left:auto;">${ch.videos.length} videos</span>
+        </div>
+        <div class="inspo-scroll">
+          ${ch.videos.map(v => `
+            <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" class="inspo-scroll-card" title="${v.title}">
+              <div class="inspo-scroll-thumb">
+                <img src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" alt="${v.title}" loading="lazy">
+                <div class="inspo-play">▶</div>
+              </div>
+              <div class="inspo-scroll-title">${v.title}</div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  } else if (tab.type === 'reels') {
+    const reels = tab.data;
+    bodyHtml = `
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:13px;color:var(--text-secondary);">Showing <strong>${reels.length} saved reel${reels.length !== 1 ? 's' : ''}</strong></span>
+      </div>
+      <div class="inspo-grid">
+        ${reels.map(r => `
+          <div class="inspo-reel-card" title="${r.caption}">
+            <iframe src="https://www.instagram.com/reel/${r.shortcode}/embed" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+            <div class="inspo-title">${r.caption}</div>
+          </div>
+        `).join('')}
+      </div>`;
+  }
 
   const html = `
     <div style="margin-bottom:24px;">
       <h2 style="font-size:22px;margin-bottom:8px;">✨ Inspiration</h2>
-      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;">Thumbnail reference from creators we study</p>
-      <div class="strategy-tabs">${tabs}</div>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;">${tab.id === 'thumbnails' ? 'Scroll through video thumbnails from channels we study' : 'Saved Instagram Reels for reference'}</p>
+      <div class="strategy-tabs">${tabsHtml}</div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <span style="font-size:13px;color:var(--text-secondary);">Showing <strong>${channel.name}</strong> — ${channel.videos.length} recent videos</span>
-      <a href="${channel.url}" target="_blank" style="font-size:12px;color:var(--accent);text-decoration:none;">Visit channel ↗</a>
-    </div>
-    <div class="inspo-grid" id="inspo-grid">
-      ${channel.videos.map(v => `
-        <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" class="inspo-card" title="${v.title}">
-          <div class="inspo-thumb">
-            <img src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" alt="${v.title}" loading="lazy">
-            <div class="inspo-play">▶</div>
-          </div>
-          <div class="inspo-title">${v.title}</div>
-        </a>
-      `).join('')}
-    </div>
+    ${bodyHtml}
   `;
 
   container.innerHTML = html;
@@ -1080,6 +1256,67 @@ function renderInspiration() {
       renderInspiration();
     });
   });
+}
+
+// Team Meetings
+const MEETING_NOTES = [
+  {
+    date: '2026-06-20',
+    title: 'Strategy & Dashboard Sync',
+    tags: ['strategy', 'dashboard', 'content'],
+    items: [
+      { type: 'section', title: 'For Danil — Dashboard Development', icon: '🛠️' },
+      { type: 'task', text: 'Add tracking channels to YouTube Dashboard — Matt Gray, Kara and Nate, Sahil Bloom, Karlton Dennis, Tim Ferriss. Future channels can be added via Slack.', done: false },
+      { type: 'task', text: 'Evolve dashboard beyond metrics — add competitor analysis, winning topic discovery, best videos tracker (6–12 months), content idea generation, and eventually transcript analysis (like Poppy AI / vidIQ).', done: false },
+      { type: 'task', text: 'Prepare an Instagram Dashboard — own posts, competitors, anomalous winning Reels tracking, trend analysis.', done: false },
+      { type: 'task', text: 'Build UTM analytics for YouTube — each video gets a UTM, track which videos drive leads and booked calls, measure business results not just views.', done: false },
+
+      { type: 'section', title: 'For Danil — Content Tasks', icon: '🎬' },
+      { type: 'task', text: 'Sort existing B-roll reels — separate published from unpublished, share unpublished ones in Slack for content calendar.', done: false },
+      { type: 'task', text: 'Create 10 more B-roll reels (not urgent, but this week) — find trends, pick audio, adapt to Eli\'s brand, send to Avery for review.', done: false },
+      { type: 'task', text: 'Build a library of strong footage — aesthetic visuals, emotional shots ("shots with soul"), material for future montage / diary-style reels.', done: false },
+
+      { type: 'section', title: 'YouTube — Thumbnails', icon: '📺' },
+      { type: 'task', text: 'Create new thumbnail concepts — Avery will share the first video idea and reference thumbnails. Danil to produce new options.', done: false },
+
+      { type: 'section', title: 'Key Strategic Takeaway (from Eli)', icon: '💡' },
+      { type: 'note', text: 'The goal is not to become the next MrBeast. We need to be "niche famous" among entrepreneurs. Content is measured not by max reach, but by: does it bring in entrepreneurs? Does it generate leads? Are people booking calls? How business-relevant is the audience?' },
+    ]
+  }
+];
+
+function renderMeetings() {
+  const container = document.getElementById('meetings-content');
+
+  const html = `
+    <div style="margin-bottom:32px;">
+      <h2 style="font-size:22px;margin-bottom:8px;">🤝 Team Meetings</h2>
+      <p style="color:var(--text-secondary);font-size:14px;">Meeting notes, decisions, and action items</p>
+    </div>
+    ${MEETING_NOTES.map(m => `
+      <div style="margin-bottom:28px;">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:2px;">${m.date}</div>
+        <div style="font-size:18px;font-weight:600;margin-bottom:8px;">${m.title}</div>
+        <div style="margin-bottom:4px;display:flex;gap:6px;">
+          ${m.tags.map(t => `<span style="font-size:11px;color:var(--text-muted);">#${t}</span>`).join('')}
+        </div>
+        <div style="line-height:1.7;font-size:14px;color:var(--text-secondary);">
+          ${m.items.map(item => {
+            if (item.type === 'section') {
+              return `<div style="font-weight:600;color:var(--text-primary);margin-top:18px;margin-bottom:4px;">${item.icon || ''} ${item.title}</div>`;
+            } else if (item.type === 'task') {
+              return `<div style="padding-left:4px;margin:2px 0;">${item.done ? '☑' : '☐'} ${item.text}</div>`;
+            } else if (item.type === 'note') {
+              return `<div style="margin:8px 0 8px 4px;color:var(--text-primary);font-style:italic;">“${item.text}”</div>`;
+            }
+            return '';
+          }).join('')}
+        </div>
+      </div>
+    `).join('')}
+  `;
+
+  container.innerHTML = html;
 }
 
 // Navigation
@@ -1094,9 +1331,10 @@ function navigate(page) {
   if (navItem) navItem.classList.add('active');
 
   state.currentPage = page;
+  document.getElementById('back-btn').style.display = page === 'video' ? 'block' : 'none';
 
   if (page !== 'video') {
-    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', strategy: 'Strategy', network: 'Network', map: 'Market Map', workshop: 'Workshop', inspiration: 'Inspiration' };
+    const titles = { dashboard: 'Dashboard', channels: 'Channels', notes: 'Notes', strategy: 'Strategy', network: 'Network', map: 'Market Map', workshop: 'Workshop', meetings: 'Team Meetings', inspiration: 'Inspiration' };
     document.getElementById('page-title').textContent = titles[page] || 'FTS Hub';
   }
 }
@@ -1114,6 +1352,7 @@ function handleHash() {
     case 'network': renderNetwork(); break;
     case 'map': renderMarketMap(); break;
     case 'workshop': renderWorkshop(); break;
+    case 'meetings': renderMeetings(); break;
     case 'inspiration': renderInspiration(); break;
   }
 }
@@ -1127,6 +1366,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const page = item.dataset.page;
       location.hash = page;
     });
+  });
+
+  // Back button
+  document.getElementById('back-btn').addEventListener('click', () => {
+    const target = state.previousPage || 'dashboard';
+    location.hash = target;
+    handleHash();
   });
 
   // Hash change

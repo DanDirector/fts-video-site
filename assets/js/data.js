@@ -336,7 +336,10 @@ const MOCK_DATA = {
       opportunity: 'Take the freedom & lifestyle angle, add concrete systems: points, cards, hotels, flights, concierge',
       affinities: [
         { id: 'ch3', type: 'collab', strength: 0.9, label: 'Noah was a guest' },
-        { id: 'ch2', type: 'shared_philosophy', strength: 0.7, label: 'Lifestyle Design' }
+        { id: 'ch2', type: 'shared_philosophy', strength: 0.7, label: 'Lifestyle Design' },
+        { id: 'ch10', type: 'shared_philosophy', strength: 0.5, label: 'Systems thinking' },
+        { id: 'ch11', type: 'shared_philosophy', strength: 0.6, label: 'Lifestyle Design / Freedom' },
+        { id: 'ch12', type: 'shared_philosophy', strength: 0.7, label: 'Lifestyle Design / Philosophy' }
       ]
     },
     {
@@ -357,7 +360,8 @@ const MOCK_DATA = {
         { id: 'ch3', type: 'collab', strength: 0.85, label: 'Noah was a guest' },
         { id: 'ch6', type: 'collab', strength: 0.8, label: 'Codie was a guest' },
         { id: 'ch4', type: 'mentions', strength: 0.5, label: 'Cite Hormozi' },
-        { id: 'ch1', type: 'shared_philosophy', strength: 0.6, label: 'Lifestyle Design' }
+        { id: 'ch1', type: 'shared_philosophy', strength: 0.6, label: 'Lifestyle Design' },
+        { id: 'ch12', type: 'mentions', strength: 0.3, label: 'Business & mindset' }
       ]
     },
     {
@@ -397,7 +401,8 @@ const MOCK_DATA = {
       affinities: [
         { id: 'ch6', type: 'collab', strength: 0.8, label: 'Codie was a guest' },
         { id: 'ch5', type: 'shared_philosophy', strength: 0.7, label: 'Both Hustle' },
-        { id: 'ch9', type: 'compared', strength: 0.4, label: 'Compared by viewers' }
+        { id: 'ch9', type: 'compared', strength: 0.4, label: 'Compared by viewers' },
+        { id: 'ch13', type: 'compared', strength: 0.4, label: 'Business finance overlap' }
       ]
     },
     {
@@ -436,7 +441,8 @@ const MOCK_DATA = {
       affinities: [
         { id: 'ch2', type: 'collab', strength: 0.8, label: 'Guest on MFM' },
         { id: 'ch4', type: 'collab', strength: 0.8, label: 'Guest on Hormozi' },
-        { id: 'ch3', type: 'collab', strength: 0.6, label: 'Guest on Noah Kagan' }
+        { id: 'ch3', type: 'collab', strength: 0.6, label: 'Guest on Noah Kagan' },
+        { id: 'ch13', type: 'shared_philosophy', strength: 0.6, label: 'Finance & asset strategy' }
       ]
     },
     {
@@ -455,7 +461,10 @@ const MOCK_DATA = {
       opportunity: 'Add his productivity systems to travel hacking — "be productive AND fly first class while doing it"',
       affinities: [
         { id: 'ch8', type: 'shared_philosophy', strength: 0.8, label: 'Both Creator Economy' },
-        { id: 'ch5', type: 'compared', strength: 0.3, label: 'Audience overlap' }
+        { id: 'ch5', type: 'compared', strength: 0.3, label: 'Audience overlap' },
+        { id: 'ch10', type: 'shared_philosophy', strength: 0.7, label: 'Both Creator Economy' },
+        { id: 'ch11', type: 'compared', strength: 0.4, label: 'Adventure lifestyle content' },
+        { id: 'ch12', type: 'shared_philosophy', strength: 0.6, label: 'Intentional living & productivity' }
       ]
     },
     {
@@ -474,7 +483,8 @@ const MOCK_DATA = {
       opportunity: 'Bridge their creator-business insights with travel perks — "build a creator business that lets you work from anywhere"',
       affinities: [
         { id: 'ch7', type: 'shared_philosophy', strength: 0.8, label: 'Both Creator Economy' },
-        { id: 'ch9', type: 'mentions', strength: 0.4, label: 'Mention YC startups' }
+        { id: 'ch9', type: 'mentions', strength: 0.4, label: 'Mention YC startups' },
+        { id: 'ch10', type: 'shared_philosophy', strength: 0.6, label: 'Both Creator Economy' }
       ]
     },
     {
@@ -494,6 +504,84 @@ const MOCK_DATA = {
       affinities: [
         { id: 'ch4', type: 'compared', strength: 0.4, label: 'Compared by viewers' },
         { id: 'ch8', type: 'mentions', strength: 0.3, label: 'Mentioned by C&S' }
+      ]
+    },
+    {
+      id: 'ch10', name: 'Matt Gray', handle: '@realmattgray',
+      church: 'creator',
+      mapPosition: { x: 75, y: 65 },
+      mapStyle: { x: 60, y: 40 },
+      mapPromise: { x: 65, y: 55 },
+      avatar: 'https://yt3.googleusercontent.com/W_GKaSoEuny3REkdSVW-AD6wcB_z5Ltr3hY_Mos94yDKlFLupVnJ6Gf8w1YfjEGps2nr62fB=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '279K', videos: 1216, color: '#74b9ff', category: 'creator', stage: 'growth', topic: 'content',
+      promise: 'How to build a personal brand that runs on systems, not hustle', enemy: 'Burnout, working harder not smarter, chaos',
+      hero: 'Systems-driven entrepreneur who builds once and scales', philosophy: 'build_systems',
+      successSymbol: 'influence', proofFormat: 'case_study',
+      tone: 'Analytical, systems-oriented, strategic',
+      weakness: 'Can be too systems-heavy — lacks the inspirational "why" punch',
+      opportunity: 'Bridge his systems thinking with luxury travel lifestyle — systems that fund first class travel',
+      affinities: [
+        { id: 'ch7', type: 'shared_philosophy', strength: 0.7, label: 'Both Creator Economy' },
+        { id: 'ch8', type: 'shared_philosophy', strength: 0.6, label: 'Both Creator Economy' },
+        { id: 'ch1', type: 'shared_philosophy', strength: 0.5, label: 'Systems & optimization' }
+      ]
+    },
+    {
+      id: 'ch11', name: 'Kara and Nate', handle: '@KaraandNate',
+      church: 'luxury',
+      mapPosition: { x: 85, y: 75 },
+      mapStyle: { x: 25, y: 75 },
+      mapPromise: { x: 80, y: 80 },
+      avatar: 'https://yt3.googleusercontent.com/ytc/AIdro_mpCv-nGurUMcHMNljVnKPO6g7bF79U6Bn1N9klH5Uq6ZY=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '4.47M', videos: 1049, color: '#00cec9', category: 'lifestyle', stage: 'growth', topic: 'content',
+      promise: 'How to travel anywhere and design a life of adventure', enemy: 'The 9-5 trap, fear of the unknown, "someday" mindset',
+      hero: 'Adventurous couple who chose experience over stuff', philosophy: 'build_systems',
+      successSymbol: 'freedom', proofFormat: 'personal_story',
+      tone: 'Energetic, adventurous, authentic',
+      weakness: 'Pure travel content — no business or financial systems angle',
+      opportunity: 'Add the financial systems and points strategies that make their lifestyle possible',
+      affinities: [
+        { id: 'ch1', type: 'shared_philosophy', strength: 0.6, label: 'Lifestyle Design / Freedom' },
+        { id: 'ch7', type: 'compared', strength: 0.4, label: 'Adventure lifestyle content' }
+      ]
+    },
+    {
+      id: 'ch12', name: 'Sahil Bloom', handle: '@Sahil_Bloom',
+      church: 'freedom',
+      mapPosition: { x: 80, y: 80 },
+      mapStyle: { x: 15, y: 25 },
+      mapPromise: { x: 75, y: 30 },
+      avatar: 'https://yt3.googleusercontent.com/NE5WU7OE4hSeKEfSYi4kclWiB84zCZ0uyre9k55Mevx8Y0E1UabJ6ftPdUbZiGxloJemK0oYA9E=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '56.3K', videos: 639, color: '#6c5ce7', category: 'lifestyle', stage: 'growth', topic: 'mindset',
+      promise: 'How to design a wealthy, wise, and intentional life', enemy: 'Hustle culture, mindless consumption, lack of purpose',
+      hero: 'Thoughtful creator who builds wealth and wisdom simultaneously', philosophy: 'build_audience',
+      successSymbol: 'peace', proofFormat: 'breakdown',
+      tone: 'Calm, intellectual, reflective',
+      weakness: 'More philosophical than tactical — lacks concrete step-by-step systems',
+      opportunity: 'Bridge his mental models with travel hacking — apply intentional living frameworks to points and lifestyle design',
+      affinities: [
+        { id: 'ch1', type: 'shared_philosophy', strength: 0.7, label: 'Lifestyle Design / Philosophy' },
+        { id: 'ch7', type: 'shared_philosophy', strength: 0.6, label: 'Intentional living & productivity' },
+        { id: 'ch2', type: 'mentions', strength: 0.3, label: 'Business & mindset' }
+      ]
+    },
+    {
+      id: 'ch13', name: 'Karlton Dennis', handle: '@karltondennis',
+      church: 'cashflow',
+      mapPosition: { x: 25, y: 20 },
+      mapStyle: { x: 80, y: 30 },
+      mapPromise: { x: 20, y: 60 },
+      avatar: 'https://yt3.googleusercontent.com/XBQ878OrY2gPg9HO3ABWjt2mAPHi-jn30G11SVhwxxH37_YuZ-EGsE0LfXVzerD-I1hqZEH9_R4=s176-c-k-c0x00ffffff-no-rj',
+      subscribers: '1.12M', videos: 2030, color: '#00d68f', category: 'acquisition', stage: 'growth', topic: 'finance',
+      promise: 'How to keep more of what you earn with smart tax strategy', enemy: 'Paying too much in taxes, bad financial decisions, IRS',
+      hero: 'Tax-savvy entrepreneur who keeps maximum money', philosophy: 'buy_assets',
+      successSymbol: 'money', proofFormat: 'numbers',
+      tone: 'Direct, educational, data-driven',
+      weakness: 'Dry financial content — no lifestyle, freedom, or luxury angle',
+      opportunity: 'Connect tax strategy to luxury travel — "write off your first class flights and save thousands"',
+      affinities: [
+        { id: 'ch6', type: 'shared_philosophy', strength: 0.6, label: 'Finance & asset strategy' },
+        { id: 'ch4', type: 'compared', strength: 0.4, label: 'Business finance overlap' }
       ]
     }
   ],
@@ -521,9 +609,7 @@ const MOCK_DATA = {
         { time: '1:35', text: 'Double your price and add more value instead.' }
       ],
       notes: [
-        { time: '0:18', text: 'Core principle: fix the offer before anything else', author: 'Danil' },
-        { time: '0:50', text: 'Add risk reversal to our product offering', author: 'Eli' },
-        { time: '1:25', text: 'We are probably undercharging — need to rethink pricing', author: 'Danil' }
+        { time: '0:18', text: 'Core principle: fix the offer before anything else', author: 'Danil' }
       ]
     },
     {
@@ -540,9 +626,7 @@ const MOCK_DATA = {
         { time: '0:15', text: 'It\'s not about intelligence. It\'s about behavior.' },
         { time: '0:28', text: 'Rich people do things poor people are unwilling to do.' }
       ],
-      notes: [
-        { time: '0:15', text: 'Behavior > intelligence — key insight for our team', author: 'Danil' }
-      ]
+      notes: []
     },
     {
       id: 'v3',
@@ -563,10 +647,7 @@ const MOCK_DATA = {
         { time: '1:25', text: 'Stop trying to hack the system.' },
         { time: '1:38', text: 'Just be useful and be consistent.' }
       ],
-      notes: [
-        { time: '0:22', text: 'This applies to our channel strategy — focus on trust first', author: 'Danil' },
-        { time: '0:48', text: '"Document, don\'t create" — great content philosophy', author: 'Eli' }
-      ]
+      notes: []
     },
     {
       id: 'v4',
@@ -600,11 +681,7 @@ const MOCK_DATA = {
         { time: '2:00', text: 'This is the dream business model.' },
         { time: '2:15', text: 'Low maintenance, high margin, fully remote.' }
       ],
-      notes: [
-        { time: '0:30', text: 'This is the kind of business we should study', author: 'Danil' },
-        { time: '1:00', text: 'Great example for our "business models" document', author: 'Eli' },
-        { time: '2:15', text: 'Automate everything, focus on what matters', author: 'Avery' }
-      ]
+      notes: []
     },
     {
       id: 'v6',
@@ -622,9 +699,7 @@ const MOCK_DATA = {
         { time: '0:45', text: 'The pattern is always the same.' },
         { time: '1:00', text: 'Find a boring industry and make it less boring.' }
       ],
-      notes: [
-        { time: '0:45', text: 'Pattern: boring industry + good software = gold', author: 'Danil' }
-      ]
+      notes: []
     },
     {
       id: 'v7',
@@ -642,9 +717,7 @@ const MOCK_DATA = {
         { time: '0:48', text: 'Most people wait for the perfect moment.' },
         { time: '1:00', text: 'There is no perfect moment. There\'s only now.' }
       ],
-      notes: [
-        { time: '0:35', text: 'Problem-first approach to business — fundamental', author: 'Danil' }
-      ]
+      notes: []
     },
     {
       id: 'v8',
@@ -674,10 +747,7 @@ const MOCK_DATA = {
         { time: '0:45', text: 'Nobody fights you for them.' },
         { time: '1:00', text: 'And they cash flow from day one.' }
       ],
-      notes: [
-        { time: '0:20', text: 'Interesting counter-point to the startup obsession', author: 'Danil' },
-        { time: '0:45', text: 'Look into local boring businesses as investment', author: 'Avery' }
-      ]
+      notes: []
     },
     {
       id: 'v10',
@@ -891,4 +961,12 @@ const INSPIRATION_CHANNELS = [
       { id: '5Gbkd7xp6Mg', title: 'What Makes You Irreplaceable When AI Destroys Most Businesses' }
     ]
   }
+];
+
+const INSPIRATION_REELS = [
+  { id: 'r1', shortcode: 'DZ0MrXSOnIi', url: 'https://www.instagram.com/reel/DZ0MrXSOnIi/', caption: 'Font inspiration — boss liked the typography in this reel' }
+];
+
+const INSPIRATION_FONTS = [
+  { id: 'f1', name: 'Font from IG reel', image: 'https://www.instagram.com/p/DZ0MrXSOnIi/media/?size=l', source: 'Instagram Reel', caption: 'Font used in the reel — boss approved' }
 ];
