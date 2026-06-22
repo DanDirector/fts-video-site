@@ -2,7 +2,8 @@ const state = {
   currentPage: 'dashboard',
   currentVideo: null,
   filter: 'all',
-  strategyTab: 'biggerworld'
+  strategyTab: 'biggerworld',
+  dashboardTab: 'youtube'
 };
 
 function getChannel(id) {
@@ -154,7 +155,208 @@ function renderOurChannelAnalytics() {
 // Dashboard
 function renderDashboard() {
   const container = document.getElementById('dashboard-content');
-  container.innerHTML = renderOurChannelAnalytics();
+  const tab = state.dashboardTab || 'youtube';
+
+  const tabsHtml = `
+    <div class="filter-tabs" style="margin-bottom:24px;">
+      <button class="filter-tab ${tab === 'youtube' ? 'active' : ''}" data-dtab="youtube">▶ YouTube</button>
+      <button class="filter-tab ${tab === 'instagram' ? 'active' : ''}" data-dtab="instagram">📸 Instagram</button>
+    </div>
+    <div id="dashboard-panel">${tab === 'youtube' ? renderOurChannelAnalytics() : renderInstagramAnalytics()}</div>
+  `;
+
+  container.innerHTML = tabsHtml;
+
+  container.querySelectorAll('[data-dtab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.dashboardTab = btn.dataset.dtab;
+      const panel = document.getElementById('dashboard-panel');
+      panel.innerHTML = state.dashboardTab === 'youtube' ? renderOurChannelAnalytics() : renderInstagramAnalytics();
+      container.querySelectorAll('[data-dtab]').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+}
+
+function renderInstagramAnalytics() {
+  const a = INSTAGRAM_ANALYTICS;
+  const maxViews = Math.max(...a.dailyViews.map(d => d.value));
+  const maxReach = Math.max(...a.dailyReach.map(d => d.value));
+  const maxFollows = Math.max(...a.dailyFollows.map(d => d.value));
+
+  const viewsBars = a.dailyViews.map(d =>
+    `<div class="spark-dot" title="${d.date}: ${formatNumber(d.value)}" style="height:${(d.value / maxViews) * 100}%;background:var(--accent);"></div>`
+  ).join('');
+
+  const reachBars = a.dailyReach.map(d =>
+    `<div class="spark-dot" title="${d.date}: ${formatNumber(d.value)}" style="height:${(d.value / maxReach) * 100}%;background:var(--success);"></div>`
+  ).join('');
+
+  const followsBars = a.dailyFollows.map(d =>
+    `<div class="bar-group">
+      <div class="bar-value">${d.value}</div>
+      <div class="bar" style="height:${(d.value / maxFollows) * 100}%;background:var(--warning);"></div>
+      <div class="bar-label" style="font-size:8px;">${d.date.slice(5)}</div>
+    </div>`
+  ).join('');
+
+  const topPostBars = a.topPosts.map(p =>
+    `<div class="hbar-item">
+      <span class="hbar-rank">${p.rank}</span>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:${p.pct}%;background:var(--accent);"></div>
+        <span class="hbar-title" style="font-size:10px;">${p.type} — ${p.desc}</span>
+      </div>
+      <span class="hbar-views" style="font-size:10px;width:70px;">${p.views}</span>
+    </div>`
+  ).join('');
+
+  const cityBars = a.audience.topCities.map(c =>
+    `<div class="hbar-item">
+      <span style="font-size:11px;color:var(--text-muted);width:14px;text-align:right;">${c.pct}%</span>
+      <div class="hbar-track" style="height:18px;">
+        <div class="hbar-fill" style="width:${c.pct * 50}%;background:var(--accent);"></div>
+        <span class="hbar-title" style="font-size:10px;">${c.city}</span>
+      </div>
+    </div>`
+  ).join('');
+
+  const countryBars = a.audience.topCountries.slice(0, 6).map(c =>
+    `<div class="hbar-item">
+      <span style="font-size:11px;color:var(--text-muted);width:14px;text-align:right;">${c.pct}%</span>
+      <div class="hbar-track" style="height:18px;">
+        <div class="hbar-fill" style="width:${c.pct * 2.5}%;background:var(--success);"></div>
+        <span class="hbar-title" style="font-size:10px;">${c.country}</span>
+      </div>
+    </div>`
+  ).join('');
+
+  const ageGenderHtml = (data, label) => data.map(g =>
+    `<div style="display:flex;align-items:center;gap:4px;font-size:11px;">
+      <span style="width:32px;color:var(--text-muted);">${g.age}</span>
+      <div style="flex:1;height:12px;background:var(--bg-card);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:${g.pct * 5}%;background:${label === 'men' ? 'var(--accent)' : 'var(--warning)'};border-radius:3px;"></div>
+      </div>
+      <span style="width:32px;text-align:right;color:var(--text-secondary);">${g.pct}%</span>
+    </div>`
+  ).join('');
+
+  return `
+    <div class="our-channel" style="margin-bottom:20px;">
+      <div class="our-channel-header">
+        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f58529,#dd2a7b);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">📸</div>
+        <div class="our-channel-info">
+          <div class="our-channel-name">Instagram Analytics</div>
+          <div class="our-channel-handle">@elifacenda</div>
+          <span class="our-channel-badge">● Connected</span>
+          <span style="font-size:12px;color:var(--text-muted);margin-left:12px;">${a.period}</span>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Posts</div>
+          <div class="metric-value">${a.overview.posts.value}</div>
+          <div class="metric-change up">${a.overview.posts.change}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Views</div>
+          <div class="metric-value">${a.overview.views.value}</div>
+          <div class="metric-change up">${a.overview.views.change}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Reach</div>
+          <div class="metric-value">${a.overview.reach.value}</div>
+          <div class="metric-change up">${a.overview.reach.change}</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Likes</div>
+          <div class="metric-value">${a.overview.likes.value}</div>
+          <div class="metric-change up">${a.overview.likes.change}</div>
+        </div>
+      </div>
+
+      <div class="analytics-row">
+        <div class="analytics-card">
+          <div class="analytics-card-title">📈 Daily Views (28 days)</div>
+          <div class="sparkline" style="height:80px;">${viewsBars}</div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:4px;">
+            <span>May 25</span>
+            <span>Jun 10</span>
+            <span>Jun 20</span>
+          </div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-card-title">📊 Daily Reach</div>
+          <div class="sparkline" style="height:80px;">${reachBars}</div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:4px;">
+            <span>May 25</span>
+            <span>Jun 10</span>
+            <span>Jun 20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics-row">
+        <div class="analytics-card">
+          <div class="analytics-card-title">🏆 Top Posts</div>
+          <div class="hbar-list">${topPostBars}</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-card-title">📦 Post Type Breakdown</div>
+          <div style="display:flex;gap:12px;margin-bottom:12px;">
+            <div style="flex:1;text-align:center;padding:12px;background:var(--bg-card);border-radius:8px;">
+              <div style="font-size:24px;font-weight:700;color:var(--accent);">${a.postTypeBreakdown.reels}</div>
+              <div style="font-size:11px;color:var(--text-muted);">Reels</div>
+              <div style="font-size:10px;color:var(--text-secondary);">${a.postTypeBreakdown.reelsPct}% views</div>
+            </div>
+            <div style="flex:1;text-align:center;padding:12px;background:var(--bg-card);border-radius:8px;">
+              <div style="font-size:24px;font-weight:700;color:var(--success);">${a.postTypeBreakdown.images}</div>
+              <div style="font-size:11px;color:var(--text-muted);">Images</div>
+              <div style="font-size:10px;color:var(--text-secondary);">${a.postTypeBreakdown.imagesPct}% views</div>
+            </div>
+            <div style="flex:1;text-align:center;padding:12px;background:var(--bg-card);border-radius:8px;">
+              <div style="font-size:24px;font-weight:700;color:var(--warning);">${a.postTypeBreakdown.carousels}</div>
+              <div style="font-size:11px;color:var(--text-muted);">Carousels</div>
+              <div style="font-size:10px;color:var(--text-secondary);">${a.postTypeBreakdown.carouselsPct}% views</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-muted);">Reels dominate with ${a.postTypeBreakdown.reelsPct}% of total views</div>
+        </div>
+      </div>
+
+      <div class="analytics-row">
+        <div class="analytics-card">
+          <div class="analytics-card-title">📅 Daily Follows</div>
+          <div class="bar-chart" style="height:100px;">${followsBars}</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-card-title">🌍 Top Cities</div>
+          <div class="hbar-list">${cityBars}</div>
+        </div>
+      </div>
+
+      <div class="analytics-row">
+        <div class="analytics-card">
+          <div class="analytics-card-title">🗺️ Top Countries</div>
+          <div class="hbar-list">${countryBars}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:8px;">US dominates at ${a.audience.topCountries[0].pct}%</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-card-title">👥 Age & Gender</div>
+          <div style="margin-bottom:8px;">
+            <div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:4px;">Men</div>
+            ${ageGenderHtml(a.audience.ageGender.men, 'men')}
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--warning);margin-bottom:4px;">Women</div>
+            ${ageGenderHtml(a.audience.ageGender.women, 'women')}
+          </div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:6px;">Core audience: Men 35-44 (17.7%)</div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function renderVideoCard(v) {

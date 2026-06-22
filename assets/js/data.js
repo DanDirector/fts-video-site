@@ -221,6 +221,100 @@ const CHANNEL_ANALYTICS = {
   }
 };
 
+const INSTAGRAM_ANALYTICS = {
+  overview: {
+    posts: { value: '21', change: 'May 25 — Jun 21' },
+    views: { value: '541.6K', change: '28-day period' },
+    reach: { value: '408.2K', change: 'unique accounts' },
+    likes: { value: '31.2K', change: 'avg 1.5K/post' }
+  },
+  period: '2026-05-25 — 2026-06-21',
+  dailyViews: [
+    { date: '2026-05-25', value: 20701 }, { date: '2026-05-26', value: 21826 },
+    { date: '2026-05-27', value: 21986 }, { date: '2026-05-28', value: 22890 },
+    { date: '2026-05-29', value: 20340 }, { date: '2026-05-30', value: 34884 },
+    { date: '2026-05-31', value: 22837 }, { date: '2026-06-01', value: 18348 },
+    { date: '2026-06-02', value: 22688 }, { date: '2026-06-03', value: 31343 },
+    { date: '2026-06-04', value: 34762 }, { date: '2026-06-05', value: 28352 },
+    { date: '2026-06-06', value: 28448 }, { date: '2026-06-07', value: 30125 },
+    { date: '2026-06-08', value: 21139 }, { date: '2026-06-09', value: 23705 },
+    { date: '2026-06-10', value: 26726 }, { date: '2026-06-11', value: 20077 },
+    { date: '2026-06-12', value: 20625 }, { date: '2026-06-13', value: 23782 },
+    { date: '2026-06-14', value: 25653 }, { date: '2026-06-15', value: 27599 },
+    { date: '2026-06-16', value: 32848 }, { date: '2026-06-17', value: 50019 },
+    { date: '2026-06-18', value: 198697 }, { date: '2026-06-19', value: 122466 },
+    { date: '2026-06-20', value: 101358 }
+  ],
+  dailyReach: [
+    { date: '2026-05-25', value: 14551 }, { date: '2026-05-26', value: 15056 },
+    { date: '2026-05-27', value: 16008 }, { date: '2026-05-28', value: 15973 },
+    { date: '2026-05-29', value: 13995 }, { date: '2026-05-30', value: 15428 },
+    { date: '2026-05-31', value: 17329 }, { date: '2026-06-01', value: 14807 },
+    { date: '2026-06-02', value: 16216 }, { date: '2026-06-03', value: 18630 },
+    { date: '2026-06-04', value: 23089 }, { date: '2026-06-05', value: 19177 },
+    { date: '2026-06-06', value: 16774 }, { date: '2026-06-07', value: 20410 },
+    { date: '2026-06-08', value: 14371 }, { date: '2026-06-09', value: 16291 },
+    { date: '2026-06-10', value: 18545 }, { date: '2026-06-11', value: 16071 },
+    { date: '2026-06-12', value: 14017 }, { date: '2026-06-13', value: 14647 },
+    { date: '2026-06-14', value: 15016 }, { date: '2026-06-15', value: 16478 },
+    { date: '2026-06-16', value: 22811 }, { date: '2026-06-17', value: 36548 },
+    { date: '2026-06-18', value: 158934 }, { date: '2026-06-19', value: 96600 },
+    { date: '2026-06-20', value: 81349 }
+  ],
+  dailyFollows: [
+    { date: '2026-05-25', value: 65 }, { date: '2026-05-26', value: 64 },
+    { date: '2026-05-27', value: 54 }, { date: '2026-05-28', value: 64 },
+    { date: '2026-05-29', value: 60 }, { date: '2026-05-30', value: 49 },
+    { date: '2026-05-31', value: 84 }, { date: '2026-06-01', value: 60 },
+    { date: '2026-06-02', value: 63 }, { date: '2026-06-03', value: 53 },
+    { date: '2026-06-04', value: 59 }, { date: '2026-06-05', value: 227 },
+    { date: '2026-06-06', value: 1147 }, { date: '2026-06-07', value: 207 },
+    { date: '2026-06-08', value: 188 }, { date: '2026-06-09', value: 48 },
+    { date: '2026-06-10', value: 68 }, { date: '2026-06-11', value: 67 },
+    { date: '2026-06-12', value: 57 }, { date: '2026-06-13', value: 52 }
+  ],
+  audience: {
+    topCities: [
+      { city: 'New York, NY', pct: 1.7 }, { city: 'Los Angeles, CA', pct: 1.1 },
+      { city: 'São Paulo, SP, Brazil', pct: 0.8 }, { city: 'Austin, TX', pct: 0.6 },
+      { city: 'Delhi, India', pct: 0.5 }, { city: 'Bangkok, Thailand', pct: 0.5 },
+      { city: 'Chicago, IL', pct: 0.5 }, { city: 'Dubai, UAE', pct: 0.4 },
+      { city: 'San Diego, CA', pct: 0.4 }, { city: 'Miami, FL', pct: 0.4 }
+    ],
+    topCountries: [
+      { country: 'United States', pct: 38.3 }, { country: 'India', pct: 9.1 },
+      { country: 'Brazil', pct: 7.8 }, { country: 'United Kingdom', pct: 2.5 },
+      { country: 'Canada', pct: 2.1 }, { country: 'Indonesia', pct: 2.1 },
+      { country: 'Italy', pct: 1.5 }, { country: 'Mexico', pct: 1.4 },
+      { country: 'Argentina', pct: 1.3 }, { country: 'Australia', pct: 1.3 }
+    ],
+    ageGender: {
+      men: [
+        { age: '18-24', pct: 5.1 }, { age: '25-34', pct: 15.4 },
+        { age: '35-44', pct: 17.7 }, { age: '45-54', pct: 10.9 },
+        { age: '55-64', pct: 6.3 }, { age: '65+', pct: 3.2 }
+      ],
+      women: [
+        { age: '18-24', pct: 2.4 }, { age: '25-34', pct: 7.6 },
+        { age: '35-44', pct: 11.6 }, { age: '45-54', pct: 9.1 },
+        { age: '55-64', pct: 6.7 }, { age: '65+', pct: 4.0 }
+      ]
+    }
+  },
+  topPosts: [
+    { rank: 1, type: 'Reel', desc: 'The World Cup is confirming something…', views: '407.6K', likes: '24.8K', saves: '2.6K', pct: 100 },
+    { rank: 2, type: 'Image', desc: 'A beautiful chapter closed ✅', views: '15.4K', likes: '481', saves: '29', pct: 4 },
+    { rank: 3, type: 'Image', desc: 'Where would you reinvest if you didn\'t pay for flights?', views: '8.9K', likes: '382', saves: '34', pct: 2 },
+    { rank: 4, type: 'Carousel', desc: 'Parents Colorado visit ✅', views: '8.8K', likes: '356', saves: '30', pct: 2 },
+    { rank: 5, type: 'Carousel', desc: 'You haven\'t taken a real day off in months…', views: '8.7K', likes: '348', saves: '41', pct: 2 }
+  ],
+  postTypeBreakdown: {
+    reels: 11, images: 5, carousels: 5,
+    reelsViews: 461186, imagesViews: 37108, carouselsViews: 43351,
+    reelsPct: 85, imagesPct: 7, carouselsPct: 8
+  }
+};
+
 const STRATEGY = {
   positioning: {
     title: 'Lifestyle Design',
