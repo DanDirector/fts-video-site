@@ -244,10 +244,10 @@ function renderInstagramAnalytics() {
   return `
     <div class="our-channel" style="margin-bottom:20px;">
       <div class="our-channel-header">
-        <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f58529,#dd2a7b);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">📸</div>
+        <img src="${OUR_CHANNEL.avatar}" class="our-channel-avatar" style="border-color:#dd2a7b;">
         <div class="our-channel-info">
-          <div class="our-channel-name">Instagram Analytics</div>
-          <div class="our-channel-handle">@elifacenda</div>
+          <div class="our-channel-name">Eli Facenda</div>
+          <div class="our-channel-handle">@elitravelguy</div>
           <span class="our-channel-badge">● Connected</span>
           <span style="font-size:12px;color:var(--text-muted);margin-left:12px;">${a.period}</span>
         </div>
