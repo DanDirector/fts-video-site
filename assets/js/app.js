@@ -1492,22 +1492,54 @@ const MEETING_NOTES = [
       { type: 'section', title: 'Key Strategic Takeaway (from Eli)', icon: '💡' },
       { type: 'note', text: 'The goal is not to become the next MrBeast. We need to be "niche famous" among entrepreneurs. Content is measured not by max reach, but by: does it bring in entrepreneurs? Does it generate leads? Are people booking calls? How business-relevant is the audience?' },
     ]
+  },
+  {
+    date: '2026-06-24',
+    title: 'Content Priorities & Editing Workflow',
+    tags: ['content', 'workflow', 'b-roll'],
+    items: [
+      { type: 'section', title: 'Action Items', icon: '✨' },
+      { type: 'task', text: 'Send email for Eli review', done: false },
+      { type: 'task', text: 'Send Hawaii Airlines lay-flat clip to Danil via Slack; then Danil replaces Qatar clip', done: false },
+      { type: 'task', text: 'Schedule 1h editing session w/ Danil re: surprise video; then hold session', done: false },
+      { type: 'task', text: 'Send thumbnail examples to Danil; then Danil creates 2–3 surprise-video thumbnails', done: false },
+      { type: 'task', text: 'Draft big-picture outline for million-points video; then review w/ Avery', done: false },
+      { type: 'task', text: 'Shoot and send 2–3 reels to Danil', done: false },
+
+      { type: 'section', title: 'Meeting Summary', icon: '📝' },
+      { type: 'note', text: 'Align on content priorities and refine the video editing workflow.' },
+
+      { type: 'section', title: 'Key Takeaways', icon: '💡' },
+      { type: 'note', text: 'New Editing Workflow: Avery and Danil will hold live editing sessions for full YouTube videos. This direct collaboration replaces asynchronous feedback to build a shared creative language and accelerate production.' },
+      { type: 'note', text: 'Content Priorities: The "Surprise" video is the top priority, followed by the "Million Points" video. The "Mojo" ski trip video is deprioritized, as Mojo trips sell out without marketing assets.' },
+      { type: 'note', text: 'Hawaii Video Fix: The Hawaii video will be updated with correct B-roll (Hawaiian Airlines, not Qatar Airways) to maintain authenticity and prevent knowledgeable viewers from spotting inaccuracies.' },
+      { type: 'note', text: 'B-Roll System: A system will be created to ensure accurate B-roll. Options include a reference call to build a spreadsheet or simply renaming specific footage files.' },
+
+      { type: 'section', title: 'Problem: Inaccurate B-Roll', icon: '⚠️' },
+      { type: 'note', text: 'The Hawaii video uses Qatar Airways B-roll instead of the correct Hawaiian Airlines footage. This inaccuracy can be spotted by knowledgeable viewers ("points nerds"), undermining content authenticity. Danil will replace the clip with correct footage Eli provides via Slack.' },
+      { type: 'note', text: 'System for Future: Two options proposed — (1) Reference Call: a recorded Fathom call where Eli explains trip footage to create a reference spreadsheet. (2) File Naming: rename specific B-roll clips (e.g., "Emirates First Class") to ensure correct usage.' },
+
+      { type: 'section', title: 'Solution: New Editing Workflow', icon: '🔄' },
+      { type: 'note', text: 'The current asynchronous feedback loop is inefficient for complex edits like the "Surprise" video (dual tone: high-pace entertainment vs. philosophical depth). Avery and Danil will hold live editing sessions — a method Avery used in film production. Process: Danil creates a rough cut → Avery and Danil meet to refine in real-time. Eli will not attend these detailed sessions.' },
+
+      { type: 'section', title: 'Content Pipeline & Priorities', icon: '📊' },
+      { type: 'task', text: 'Hawaii Video — publishes today after the B-roll fix.', done: false },
+      { type: 'task', text: '"Surprise" Video — top priority. Eli will review the latest cut. A short-form teaser will be created from the final version.', done: false },
+      { type: 'task', text: '"Million Points" Video — second priority. Eli will draft the outline for review with Avery.', done: false },
+      { type: 'task', text: '"Mojo" Ski Trip Video — deprioritized. Only vertical footage available, requiring a montage edit. Eli could record a talking-head segment to provide a clear narrative spine.', done: false },
+      { type: 'task', text: 'Reels — Eli will shoot more reels today using existing scripts and new ideas to build the content backlog.', done: false },
+    ]
   }
 ];
 
 function renderMeetings() {
   const container = document.getElementById('meetings-content');
 
-  const html = `
-    <div style="margin-bottom:32px;">
-      <h2 style="font-size:22px;margin-bottom:8px;">🤝 Team Meetings</h2>
-      <p style="color:var(--text-secondary);font-size:14px;">Meeting notes, decisions, and action items</p>
-    </div>
-    ${MEETING_NOTES.map(m => `
-      <div style="margin-bottom:28px;">
-        <div style="font-size:13px;color:var(--text-muted);margin-bottom:2px;">${m.date}</div>
-        <div style="font-size:18px;font-weight:600;margin-bottom:8px;">${m.title}</div>
-        <div style="margin-bottom:4px;display:flex;gap:6px;">
+  function renderMeetingContent(m) {
+    return `
+      <div>
+        <div style="font-size:20px;font-weight:600;margin-bottom:4px;">${m.title}</div>
+        <div style="margin-bottom:12px;display:flex;gap:6px;">
           ${m.tags.map(t => `<span style="font-size:11px;color:var(--text-muted);">#${t}</span>`).join('')}
         </div>
         <div style="line-height:1.7;font-size:14px;color:var(--text-secondary);">
@@ -1523,10 +1555,41 @@ function renderMeetings() {
           }).join('')}
         </div>
       </div>
-    `).join('')}
+    `;
+  }
+
+  const tabsHtml = MEETING_NOTES.map((m, i) => `
+    <button class="meeting-tab ${i === 0 ? 'active' : ''}" data-index="${i}">${m.date}</button>
+  `).join('');
+
+  const panelsHtml = MEETING_NOTES.map((m, i) => `
+    <div class="meeting-panel" data-index="${i}" style="display:${i === 0 ? 'block' : 'none'};">
+      ${renderMeetingContent(m)}
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div style="margin-bottom:24px;">
+      <h2 style="font-size:22px;margin-bottom:8px;">🤝 Team Meetings</h2>
+      <p style="color:var(--text-secondary);font-size:14px;">Meeting notes, decisions, and action items</p>
+    </div>
+    <div style="display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0;">
+      ${tabsHtml}
+    </div>
+    <div>
+      ${panelsHtml}
+    </div>
   `;
 
-  container.innerHTML = html;
+  container.querySelectorAll('.meeting-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      container.querySelectorAll('.meeting-tab').forEach(t => t.classList.remove('active'));
+      container.querySelectorAll('.meeting-panel').forEach(p => p.style.display = 'none');
+      tab.classList.add('active');
+      const panel = container.querySelector(`.meeting-panel[data-index="${tab.dataset.index}"]`);
+      if (panel) panel.style.display = 'block';
+    });
+  });
 }
 
 // Navigation
